@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-navy: #0b192c;
+  --color-navy-dark: #071325;
+  --color-navy-text: #0a1626;
+  --color-slate-blue: #6784a3;
+  --color-slate-muted: #5a6e85;
+  --color-gold: #c2a675;
+  --color-offwhite-bar: #f8f9fb;
+  --color-card-bg: rgba(11, 23, 40, 0.70);
+  --color-card-border: rgba(255, 255, 255, 0.12);
+  --color-body-grey: #556579;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--color-navy-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    overflow-x: clip;
+  }
+}
+
+@keyframes ticker-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes progress-fill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress-fill {
+  animation: progress-fill 6s linear forwards;
+}
+
+@layer utilities {
+  .tracking-eyebrow {
+    letter-spacing: 0.25em;
+  }
+  
+  .glass-card {
+    background: rgba(11, 23, 40, 0.70);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-card:hover {
+    background: rgba(19, 36, 58, 0.82);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  /* Marquee ticker animation */
+  .animate-ticker-left {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll-left 25s linear infinite;
+  }
+
+  .animate-ticker-left:hover {
+    animation-play-state: paused;
+  }
+
+  /* Hide scrollbar for clean horizontal logo strip */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

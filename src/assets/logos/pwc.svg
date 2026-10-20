@@ -1,0 +1,10 @@
+<svg viewBox="0 0 70 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto">
+  <!-- PwC geometric symbol -->
+  <g fill="currentColor" fill-opacity="0.85">
+    <rect x="22" y="2" width="7" height="10" />
+    <rect x="29" y="5" width="5" height="7" />
+    <rect x="19" y="8" width="6" height="4" />
+  </g>
+  <!-- PwC wordmark -->
+  <text x="2" y="27" font-family="'Inter', 'Georgia', serif" font-weight="700" font-size="16" fill="currentColor" letter-spacing="-0.02em">pwc</text>
+</svg>

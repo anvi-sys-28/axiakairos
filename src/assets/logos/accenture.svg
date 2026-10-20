@@ -1,0 +1,6 @@
+<svg viewBox="0 0 105 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-6 w-auto">
+  <!-- Accent chevron above the 't' -->
+  <path d="M52 3L57 7L52 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Accenture text lowercase -->
+  <text x="0" y="21" font-family="'Inter', sans-serif" font-weight="700" font-size="16" fill="currentColor" letter-spacing="-0.03em">accenture</text>
+</svg>

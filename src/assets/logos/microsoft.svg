@@ -1,0 +1,9 @@
+<svg viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-6 w-auto">
+  <!-- Microsoft 4-square icon -->
+  <rect x="0" y="4" width="9" height="9" fill="currentColor" fill-opacity="0.8" />
+  <rect x="11" y="4" width="9" height="9" fill="currentColor" fill-opacity="0.8" />
+  <rect x="0" y="15" width="9" height="9" fill="currentColor" fill-opacity="0.8" />
+  <rect x="11" y="15" width="9" height="9" fill="currentColor" fill-opacity="0.8" />
+  <!-- Microsoft text -->
+  <text x="28" y="19" font-family="'Segoe UI', 'Inter', sans-serif" font-weight="600" font-size="16" fill="currentColor" letter-spacing="-0.02em">Microsoft</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg viewBox="0 0 100 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-6 w-auto">
+  <!-- HSBC Hexagon symbol -->
+  <g fill="currentColor" fill-opacity="0.85">
+    <!-- Left triangle pointing right -->
+    <polygon points="2,14 10,7 10,21" />
+    <!-- Right triangle pointing left -->
+    <polygon points="26,14 18,7 18,21" />
+    <!-- Top triangle pointing down -->
+    <polygon points="14,2 10,7 18,7" />
+    <!-- Bottom triangle pointing up -->
+    <polygon points="14,26 10,21 18,21" />
+    <!-- Center diamond / hourglass -->
+    <polygon points="14,7 18,14 14,21 10,14" fill-opacity="0.2" />
+  </g>
+  <!-- HSBC text -->
+  <text x="34" y="20" font-family="'Inter', sans-serif" font-weight="700" font-size="16" fill="currentColor" letter-spacing="0.08em">HSBC</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg viewBox="0 0 65 30" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-6 w-auto">
+  <!-- SAP Badge background -->
+  <path d="M4 2C1.79086 2 0 3.79086 0 6V24C0 26.2091 1.79086 28 4 28H56L64 15L56 2H4Z" fill="currentColor" fill-opacity="0.85" />
+  <!-- SAP Text -->
+  <text x="7" y="21" font-family="'Inter', 'Arial Black', sans-serif" font-weight="900" font-size="16" fill="#f8f9fb" letter-spacing="0.05em">SAP</text>
+</svg>
