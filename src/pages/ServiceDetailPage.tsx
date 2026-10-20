@@ -53,7 +53,7 @@ export function ServiceDetailPage() {
         title={service.seo.title}
         description={service.seo.description}
         canonicalUrl={canonicalUrl}
-        ogImage={service.intro.image || '/assets/hero.jpg'}
+        ogImage={service.intro.image || '/l.webp'}
         jsonLd={[
           {
             '@context': 'https://schema.org',

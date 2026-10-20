@@ -12,12 +12,22 @@ export function SEO({
   title,
   description,
   canonicalUrl,
-  ogImage = '/assets/hero.jpg',
+  ogImage = '/l.webp',
   jsonLd = [],
 }: SEOProps) {
   useEffect(() => {
     // 1. Update document title
     document.title = title;
+
+    // 2. Ensure browser tab favicon uses l.webp
+    let iconLink = document.querySelector('link[rel="icon"]') as HTMLLinkElement | null;
+    if (!iconLink) {
+      iconLink = document.createElement('link');
+      iconLink.rel = 'icon';
+      document.head.appendChild(iconLink);
+    }
+    iconLink.type = 'image/webp';
+    iconLink.href = '/l.webp';
 
     // Helper to update or create meta tags
     const setMeta = (attrName: 'name' | 'property', attrValue: string, content: string) => {
@@ -44,18 +54,31 @@ export function SEO({
       link.setAttribute('href', canonicalUrl);
     }
 
+    // Resolve full absolute URL for Open Graph image (crucial for WhatsApp link previews)
+    const resolvedOgImage = ogImage.startsWith('http')
+      ? ogImage
+      : typeof window !== 'undefined'
+        ? `${window.location.origin}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`
+        : ogImage;
+
     // OpenGraph
     setMeta('property', 'og:title', title);
     setMeta('property', 'og:description', description);
     setMeta('property', 'og:type', 'website');
+    setMeta('property', 'og:site_name', 'AXIA KAIROS');
     if (canonicalUrl) setMeta('property', 'og:url', canonicalUrl);
-    setMeta('property', 'og:image', ogImage);
+    setMeta('property', 'og:image', resolvedOgImage);
+    setMeta('property', 'og:image:secure_url', resolvedOgImage);
+    setMeta('property', 'og:image:type', ogImage.endsWith('.webp') ? 'image/webp' : 'image/png');
+    setMeta('property', 'og:image:width', '1254');
+    setMeta('property', 'og:image:height', '1254');
+    setMeta('property', 'og:image:alt', 'AXIA KAIROS Official Logo');
 
     // Twitter Card
     setMeta('name', 'twitter:card', 'summary_large_image');
     setMeta('name', 'twitter:title', title);
     setMeta('name', 'twitter:description', description);
-    setMeta('name', 'twitter:image', ogImage);
+    setMeta('name', 'twitter:image', resolvedOgImage);
 
     // JSON-LD Structured Data
     const scriptId = 'page-json-ld';

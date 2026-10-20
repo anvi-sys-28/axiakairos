@@ -16,8 +16,8 @@ export const AssistantLauncher: React.FC = () => {
   const chatRef = useRef<ChatPanelRef>(null);
   const previouslyFocusedElement = useRef<HTMLElement | null>(null);
 
-  // Hidden on /assistant page
-  const isAssistantPage = location.pathname === '/assistant';
+  // Hidden on /assistant page and /admin portal
+  const isHiddenPage = location.pathname === '/assistant' || location.pathname.startsWith('/admin');
 
   const handleOpen = () => {
     previouslyFocusedElement.current = document.activeElement as HTMLElement;
@@ -79,7 +79,7 @@ export const AssistantLauncher: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, handleClose]);
 
-  if (isAssistantPage) {
+  if (isHiddenPage) {
     return null;
   }
 

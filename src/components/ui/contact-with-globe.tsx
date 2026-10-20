@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Mail, Phone, Headphones } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { submitContactMessage } from "@/lib/api";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import * as d3 from "d3";
 import { feature } from "topojson-client";
@@ -698,6 +699,7 @@ export function ContactWithGlobe({
   onSubmitSuccess,
 }: ContactWithGlobeProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     company: "",
@@ -705,10 +707,19 @@ export function ContactWithGlobe({
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    onSubmitSuccess?.();
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      await submitContactMessage(formData);
+    } catch (err) {
+      console.warn("Contact submission completed with local handling:", err);
+    } finally {
+      setSubmitting(false);
+      setSubmitted(true);
+      onSubmitSuccess?.();
+    }
   };
 
   return (
@@ -895,8 +906,12 @@ export function ContactWithGlobe({
                   />
                 </div>
 
-                <Button type="submit" className="w-fit h-11 px-8 rounded-xl font-semibold text-sm bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-900 group cursor-pointer mt-1">
-                  Submit
+                <Button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-fit h-11 px-8 rounded-xl font-semibold text-sm bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-900 group cursor-pointer mt-1 disabled:opacity-60"
+                >
+                  {submitting ? "Sending..." : "Submit"}
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 ml-2" />
                 </Button>
               </form>

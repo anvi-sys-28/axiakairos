@@ -5,6 +5,7 @@ import { Hero } from './components/Hero';
 import { TrustedBy } from './components/TrustedBy';
 import { StickyMediaSection } from './components/StickyMediaSection';
 import { Footer } from './components/Footer';
+import { SEO } from './components/SEO';
 import { siteContent } from './content/site';
 
 const SLIDE_DURATION_MS = 6000;
@@ -51,6 +52,12 @@ export function App() {
 
   return (
     <div className="min-h-screen w-full bg-white dark:bg-[#05080e] text-axia-navy dark:text-slate-100 flex flex-col selection:bg-axia-slate/20 overflow-x-clip transition-colors duration-300">
+      <SEO
+        title="AXIA® KAIROS — Strategy that moves you forward."
+        description="Axia Kairos Advisory & Technology Group — Strategy that moves you forward. Cloud Platform Modernization, SAP S/4HANA Migrations, AI & Managed Services."
+        canonicalUrl="https://axiakairos.com/"
+        ogImage="/l.webp"
+      />
       {/* 1. Header (with integrated SunMoonThemeToggle & animated StrokeText) */}
       <Header onCtaClick={handleTalkToUs} />
 

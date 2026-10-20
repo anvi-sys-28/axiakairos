@@ -1,31 +1,42 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import jwt from 'jsonwebtoken';
 import { handleChat, ChatMessage } from './chat-engine';
 import { getRetriever } from './retrieval';
 import { logHandoffSubmission } from './guardrails';
+import {
+  initDb,
+  getDbStatus,
+  createContactMessage,
+  getContactMessages,
+  updateContactStatus,
+  deleteContactMessage,
+  getStats,
+} from './db';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const ADMIN_JWT_SECRET = process.env.ADMIN_JWT_SECRET || 'axia-admin-super-secret-key-2026';
 
-// CORS allowlist
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://localhost:3001')
-  .split(',')
-  .map((o) => o.trim());
+// Initialize DB on boot
+initDb().catch((err) => {
+  console.error('Database initialization warning:', err);
+});
 
+// Permissive CORS for seamless Railway (backend) + Vercel (frontend) deployment
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, server-to-server) or matching allowedOrigins
-      if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
-        return callback(null, true);
-      }
-      return callback(null, true); // Permissive in local dev for seamless testing
+      // In production and dev, allow incoming web requests from frontend
+      callback(null, true);
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'x-eval-suite'],
   })
 );
 
@@ -42,7 +53,6 @@ interface RateRecord {
 const rateLimitMap = new Map<string, RateRecord>();
 
 function checkRateLimit(req: Request, ip: string): { allowed: boolean; retryAfter?: number } {
-  // Allow eval suite and internal tests to run without rate limiting
   if (req.headers['x-eval-suite'] === 'true' || process.env.NODE_ENV === 'test') {
     return { allowed: true };
   }
@@ -55,7 +65,6 @@ function checkRateLimit(req: Request, ip: string): { allowed: boolean; retryAfte
     dayReset: now + 24 * 60 * 60 * 1000,
   };
 
-  // Reset counters if expired
   if (now > record.minuteReset) {
     record.minuteCount = 0;
     record.minuteReset = now + 60 * 1000;
@@ -79,17 +88,40 @@ function checkRateLimit(req: Request, ip: string): { allowed: boolean; retryAfte
   return { allowed: true };
 }
 
+// Admin Authentication Middleware
+function authenticateAdmin(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Unauthorized. Admin token required.' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  try {
+    const decoded = jwt.verify(token, ADMIN_JWT_SECRET) as any;
+    if (decoded && decoded.username === 'admin') {
+      (req as any).adminUser = decoded;
+      return next();
+    }
+    return res.status(403).json({ error: 'Forbidden. Invalid admin role.' });
+  } catch (err) {
+    return res.status(401).json({ error: 'Session expired or invalid token. Please log in again.' });
+  }
+}
+
 // 1. GET /api/health
 app.get('/api/health', (req: Request, res: Response) => {
   try {
     const retriever = getRetriever();
     const chunksCount = retriever.getAllChunks().length;
+    const dbStatus = getDbStatus();
+
     res.json({
       status: 'ok',
       timestamp: new Date().toISOString(),
       kbChunks: chunksCount,
       aiModel: process.env.CHAT_MODEL || 'claude-3-5-sonnet-latest',
       hasApiKey: !!process.env.ANTHROPIC_API_KEY,
+      database: dbStatus,
     });
   } catch (err: any) {
     res.status(503).json({
@@ -112,7 +144,6 @@ app.post('/api/chat', async (req: Request, res: Response) => {
 
   const { message, history = [], intent } = req.body;
 
-  // Handle special "suggest" intent for refreshing chip questions
   if (intent === 'suggest') {
     const suggestionsPool = [
       ['Tell me about SAP S/4HANA migrations', 'What cloud platforms do you support?', 'How do you work with clients?'],
@@ -132,7 +163,6 @@ app.post('/api/chat', async (req: Request, res: Response) => {
     return res.status(400).json({ error: 'Message exceeds the 1000 character limit.' });
   }
 
-  // Set up SSE headers
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache, no-transform',
@@ -180,11 +210,155 @@ app.post('/api/handoff', (req: Request, res: Response) => {
   });
 });
 
+// 4. POST /api/contact - Public contact message submission
+app.post('/api/contact', async (req: Request, res: Response) => {
+  try {
+    const { fullName, company, email, message } = req.body;
+
+    if (!fullName || !email || !message) {
+      return res.status(400).json({ error: 'Full Name, Email, and Message are required.' });
+    }
+
+    const saved = await createContactMessage({
+      fullName: String(fullName).trim(),
+      company: company ? String(company).trim() : '',
+      email: String(email).trim().toLowerCase(),
+      message: String(message).trim(),
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: 'Thank you! Your message has been received.',
+      data: saved,
+    });
+  } catch (err: any) {
+    console.error('Contact submit error:', err);
+    return res.status(500).json({ error: 'Failed to record contact message. Please try again.' });
+  }
+});
+
+// 5. POST /api/admin/login - Admin authentication
+app.post('/api/admin/login', (req: Request, res: Response) => {
+  const { username, password } = req.body;
+
+  // Strict check: username 'admin', password 'admin123'
+  if (username === 'admin' && password === 'admin123') {
+    const token = jwt.sign(
+      {
+        username: 'admin',
+        role: 'admin',
+      },
+      ADMIN_JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    return res.json({
+      success: true,
+      token,
+      user: {
+        username: 'admin',
+        role: 'Administrator',
+      },
+      dbStatus: getDbStatus(),
+    });
+  }
+
+  return res.status(401).json({
+    success: false,
+    error: 'Invalid credentials. Please verify your User ID and Password.',
+  });
+});
+
+// 6. GET /api/admin/messages - List all contact messages
+app.get('/api/admin/messages', authenticateAdmin, async (req: Request, res: Response) => {
+  try {
+    const messages = await getContactMessages();
+    const stats = await getStats();
+    return res.json({
+      success: true,
+      messages,
+      stats,
+      dbStatus: getDbStatus(),
+    });
+  } catch (err: any) {
+    console.error('Error fetching admin messages:', err);
+    return res.status(500).json({ error: 'Failed to retrieve messages.' });
+  }
+});
+
+// 7. PATCH /api/admin/messages/:id - Update message status
+app.patch('/api/admin/messages/:id', authenticateAdmin, async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const validStatuses = ['unread', 'read', 'archived', 'replied'];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ error: `Invalid status. Must be one of: ${validStatuses.join(', ')}` });
+    }
+
+    const updated = await updateContactStatus(id, status);
+    if (!updated) {
+      return res.status(404).json({ error: 'Message not found' });
+    }
+
+    return res.json({ success: true, message: `Message marked as ${status}` });
+  } catch (err: any) {
+    console.error('Error updating message status:', err);
+    return res.status(500).json({ error: 'Failed to update message.' });
+  }
+});
+
+// 8. DELETE /api/admin/messages/:id - Delete a contact message
+app.delete('/api/admin/messages/:id', authenticateAdmin, async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const deleted = await deleteContactMessage(id);
+    if (!deleted) {
+      return res.status(404).json({ error: 'Message not found' });
+    }
+    return res.json({ success: true, message: 'Message deleted successfully.' });
+  } catch (err: any) {
+    console.error('Error deleting message:', err);
+    return res.status(500).json({ error: 'Failed to delete message.' });
+  }
+});
+
+// 9. GET /api/admin/stats - Quick stats
+app.get('/api/admin/stats', authenticateAdmin, async (req: Request, res: Response) => {
+  try {
+    const stats = await getStats();
+    return res.json({
+      success: true,
+      stats,
+      dbStatus: getDbStatus(),
+    });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Failed to retrieve stats.' });
+  }
+});
+
+// 10. POST /api/admin/seed-test - Inject a sample inquiry for testing
+app.post('/api/admin/seed-test', authenticateAdmin, async (req: Request, res: Response) => {
+  try {
+    const sample = await createContactMessage({
+      fullName: 'Sarah Jenkins',
+      company: 'Apex Cloud Solutions',
+      email: 's.jenkins@apexcloud.io',
+      message: 'Requesting an architectural review for multi-region Kubernetes migration and automated CI/CD pipeline modernization.',
+    });
+    return res.json({ success: true, message: 'Test message created', data: sample });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Failed to create test message.' });
+  }
+});
+
 // Start Express server
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`🚀 AXIA Assistant Server listening on http://localhost:${PORT}`);
     console.log(`📡 Health Check: http://localhost:${PORT}/api/health`);
+    console.log(`🔐 Admin endpoints ready at http://localhost:${PORT}/api/admin/*`);
   });
 }
 

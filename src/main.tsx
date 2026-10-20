@@ -17,6 +17,7 @@ const CareersLandingPage = lazy(() => import('./pages/CareersLandingPage'));
 const JobDetailPage = lazy(() => import('./pages/JobDetailPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const AssistantPage = lazy(() => import('./features/assistant/AssistantPage'));
+const AdminPage = lazy(() => import('./pages/AdminPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 import { AssistantLauncher } from './features/assistant/AssistantLauncher';
 
@@ -47,6 +48,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/contact-us" element={<ContactPage />} />
           <Route path="/assistant" element={<AssistantPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>

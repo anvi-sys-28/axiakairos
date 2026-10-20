@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { SEO } from '../components/SEO';
 import DuotoneTeamRoster from '../components/ui/duotone-team-roster';
 
 export function AboutPage() {
@@ -28,6 +29,12 @@ export function AboutPage() {
 
   return (
     <div className="min-h-screen w-full bg-[#f8f9fb] dark:bg-[#05080e] text-[#0b192c] dark:text-slate-100 flex flex-col selection:bg-axia-slate/20 overflow-x-clip transition-colors duration-300">
+      <SEO
+        title="About Axia Kairos — Strategic Leadership & Enterprise Transformation"
+        description="Meet the minds behind Axia Kairos. Strategic consultants, digital architects, and transformation leaders empowering global enterprises."
+        canonicalUrl="https://axiakairos.com/about"
+        ogImage="/l.webp"
+      />
       {/* 1. Header (with integrated AnimatedThemeToggle) */}
       <Header />
 

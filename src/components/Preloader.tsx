@@ -21,6 +21,7 @@ export const Preloader: React.FC = () => {
   // Check session storage immediately so repeat navigations do not flash
   const [shouldRender, setShouldRender] = useState(() => {
     if (typeof window === "undefined") return false;
+    if (window.location.pathname.startsWith("/admin")) return false;
     try {
       return !sessionStorage.getItem(PRELOADER_CONFIG.sessionStorageKey);
     } catch {
