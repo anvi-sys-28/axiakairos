@@ -10,7 +10,7 @@ export interface ElasticReelItem {
   tag: string;
   image: string;
   fallbackImage?: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   shortDescription?: string;
   metric?: string;
   metricLabel?: string;
@@ -227,14 +227,9 @@ export function ElasticReel({
 
                     {/* Bottom Content: Title & Summary */}
                     <div className="space-y-2.5">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shrink-0 shadow-lg">
-                          {item.icon}
-                        </div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-tight drop-shadow-md">
-                          {item.title}
-                        </h3>
-                      </div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-tight drop-shadow-md">
+                        {item.title}
+                      </h3>
 
                       {item.shortDescription && (
                         <p className="text-slate-200 text-[13px] sm:text-[13.5px] line-clamp-2 leading-relaxed drop-shadow-sm">
@@ -261,15 +256,15 @@ export function ElasticReel({
                   </motion.div>
                 ) : (
                   /* Inactive Slice Vertical State */
-                  <div className="absolute inset-0 py-5 flex flex-col items-center justify-between z-10 pointer-events-none">
-                    {/* Top Slice Icon */}
-                    <div className="w-8 h-8 rounded-lg bg-black/60 border border-white/10 flex items-center justify-center text-slate-300 group-hover:text-white group-hover:scale-110 transition-all shadow-md">
-                      {item.icon}
-                    </div>
+                  <div className="absolute inset-0 py-6 flex flex-col items-center justify-between z-10 pointer-events-none">
+                    {/* Top Step Indicator */}
+                    <span className="font-mono text-[11px] font-bold tracking-widest text-[#c2a675] opacity-80 group-hover:opacity-100 transition-opacity">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
 
                     {/* Vertical Category Tag (Fits cleanly within 500px height without clipping) */}
                     <div
-                      className="font-mono text-[11px] tracking-[0.18em] text-slate-400 group-hover:text-white uppercase whitespace-nowrap transition-colors"
+                      className="font-mono text-[11px] tracking-[0.18em] text-slate-300 group-hover:text-white uppercase whitespace-nowrap transition-colors"
                       style={{
                         writingMode: "vertical-rl",
                         transform: "rotate(180deg)",
@@ -278,10 +273,8 @@ export function ElasticReel({
                       {item.tag || item.title}
                     </div>
 
-                    {/* Bottom Step Indicator */}
-                    <span className="font-mono text-[11px] font-semibold text-slate-400 group-hover:text-[#c2a675] transition-colors">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
+                    {/* Bottom Accent Dot */}
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/30 group-hover:bg-[#c2a675] transition-colors" />
                   </div>
                 )}
               </AnimatePresence>

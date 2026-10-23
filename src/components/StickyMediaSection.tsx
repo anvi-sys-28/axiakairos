@@ -6,11 +6,7 @@ import {
   Pause, 
   Volume2, 
   VolumeX, 
-  ArrowUpRight, 
-  ShieldCheck, 
-  Globe, 
-  Cpu,
-  Layers
+  ArrowUpRight
 } from 'lucide-react';
 import defaultPoster from '../assets/hero.webp';
 
@@ -21,7 +17,7 @@ export interface StickyFeatureMetric {
 
 export interface StickyFeatureCapability {
   id: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   tag?: string;
   title: string;
   description: string;
@@ -75,28 +71,24 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
   capabilities = [
     {
       id: "sap-cloud",
-      icon: <Layers className="w-5 h-5 text-[#c2a675]" />,
       tag: "ENTERPRISE ERP & CLOUD",
       title: "SAP S/4HANA & Cloud Modernization",
       description: "End-to-end advisory, migration, and implementation accelerating legacy transition to modern hyperscaler and SAP BTP environments."
     },
     {
       id: "ai-automation",
-      icon: <Cpu className="w-5 h-5 text-sky-400" />,
       tag: "INTELLIGENT WORKFLOWS",
       title: "Enterprise AI & Business Automation",
       description: "Deploying secure enterprise agentic workflows, conversational intelligence, and automated decision orchestration across operations."
     },
     {
       id: "data-analytics",
-      icon: <Globe className="w-5 h-5 text-emerald-400" />,
       tag: "DECISION ARCHITECTURE",
       title: "Data Engineering & Real-Time Analytics",
       description: "Unified modern data platforms, governance frameworks, and executive intelligence dashboards driving predictive business agility."
     },
     {
       id: "cyber-security",
-      icon: <ShieldCheck className="w-5 h-5 text-indigo-400" />,
       tag: "RESILIENCE & GOVERNANCE",
       title: "Cyber Security & Managed IT Services",
       description: "Proactive 24/7 infrastructure monitoring, zero-trust architectures, and SOC oversight keeping enterprise systems resilient."
@@ -425,25 +417,24 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
                   transition={{ duration: 0.45, delay: shouldReduceMotion ? 0 : index * 0.08 }}
                   className="rounded-2xl p-5 sm:p-6 bg-white dark:bg-[#0a0d14] border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/30 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-md dark:hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] group"
                 >
-                  <div className="flex items-start space-x-4">
-                    {/* Icon Badge */}
-                    <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 group-hover:border-slate-300 dark:group-hover:border-white/20 group-hover:scale-105 transition-all duration-300 shrink-0">
-                      {capability.icon}
-                    </div>
-
-                    <div className="flex flex-col space-y-1.5">
+                  <div className="flex flex-col space-y-2">
+                    <div className="flex items-center justify-between">
                       {capability.tag && (
-                        <span className="font-mono text-[10.5px] tracking-[0.18em] text-[#c2a675] uppercase">
+                        <span className="font-mono text-[10.5px] tracking-[0.18em] text-[#c2a675] uppercase font-medium">
                           {capability.tag}
                         </span>
                       )}
-                      <h3 className="text-[17px] sm:text-[18px] font-semibold text-[#0b192c] dark:text-white tracking-tight leading-snug group-hover:text-[#c2a675] dark:group-hover:text-white transition-colors">
-                        {capability.title}
-                      </h3>
-                      <p className="text-slate-600 dark:text-slate-400 text-[13.5px] sm:text-[14px] leading-relaxed">
-                        {capability.description}
-                      </p>
+                      <span className="font-mono text-[11px] text-slate-400 dark:text-slate-500 font-semibold select-none">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
                     </div>
+
+                    <h3 className="text-[17px] sm:text-[18px] font-semibold text-[#0b192c] dark:text-white tracking-tight leading-snug group-hover:text-[#c2a675] dark:group-hover:text-white transition-colors">
+                      {capability.title}
+                    </h3>
+                    <p className="text-slate-600 dark:text-slate-400 text-[13.5px] sm:text-[14px] leading-relaxed">
+                      {capability.description}
+                    </p>
                   </div>
                 </motion.div>
               ))}

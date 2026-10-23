@@ -2,21 +2,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  Factory,
-  Landmark,
-  Plane,
-  ShoppingCart,
-  GraduationCap,
-  Building2,
-  Zap,
-  Heart,
-  CreditCard,
-  Fuel,
-  Pill,
-  Radio,
   ArrowRight,
-  CheckCircle2,
-  TrendingUp
+  CheckCircle2
 } from 'lucide-react';
 import { ElasticReel, type ElasticReelItem } from './ui/elastic-reel';
 
@@ -52,7 +39,6 @@ export const INDUSTRIES_DATA: IndustryData[] = [
     },
     image: "/assets/case-studies/manufacturing-automation-sap-btp.webp",
     fallbackImage: "/assets/card_sunset.webp",
-    icon: <Factory className="w-5 h-5 text-[#c2a675]" />,
     caseStudySlug: "manufacturing-automation-sap-btp"
   },
   {
@@ -75,7 +61,6 @@ export const INDUSTRIES_DATA: IndustryData[] = [
     },
     image: "/assets/case-studies/sap-s4hana-migration-bfsi.webp",
     fallbackImage: "/assets/card_sunset.webp",
-    icon: <Landmark className="w-5 h-5 text-sky-400" />,
     caseStudySlug: "sap-s4hana-migration-bfsi"
   },
   {
@@ -98,7 +83,6 @@ export const INDUSTRIES_DATA: IndustryData[] = [
     },
     image: "/assets/case-studies/logistics-sap-automation-integration.webp",
     fallbackImage: "/assets/card_sunset.webp",
-    icon: <Plane className="w-5 h-5 text-indigo-400" />,
     caseStudySlug: "logistics-sap-automation-integration"
   },
   {
@@ -121,7 +105,6 @@ export const INDUSTRIES_DATA: IndustryData[] = [
     },
     image: "/assets/case-studies/cloud-modernization-retail.webp",
     fallbackImage: "/assets/card_sunset.webp",
-    icon: <ShoppingCart className="w-5 h-5 text-emerald-400" />,
     caseStudySlug: "cloud-modernization-retail"
   },
   {
@@ -143,8 +126,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       label: "Concurrent active learners supported globally"
     },
     image: "/assets/case-studies/public-sector-data-analytics-automation.webp",
-    fallbackImage: "/assets/card_sunset.webp",
-    icon: <GraduationCap className="w-5 h-5 text-amber-400" />
+    fallbackImage: "/assets/card_sunset.webp"
   },
   {
     id: "egovernance-public-sector",
@@ -166,7 +148,6 @@ export const INDUSTRIES_DATA: IndustryData[] = [
     },
     image: "/assets/case-studies/public-sector-data-analytics-automation.webp",
     fallbackImage: "/assets/card_sunset.webp",
-    icon: <Building2 className="w-5 h-5 text-cyan-400" />,
     caseStudySlug: "public-sector-data-analytics-automation"
   },
   {
@@ -189,7 +170,6 @@ export const INDUSTRIES_DATA: IndustryData[] = [
     },
     image: "/assets/case-studies/sap-s-4-hana-migration-and-data-governance-modernization-for-a-global-energy-and-utilities-enterprise.webp",
     fallbackImage: "/assets/card_sunset.webp",
-    icon: <Zap className="w-5 h-5 text-yellow-400" />,
     caseStudySlug: "sap-s-4-hana-migration-and-data-governance-modernization-for-a-global-energy-and-utilities-enterprise"
   },
   {
@@ -212,7 +192,6 @@ export const INDUSTRIES_DATA: IndustryData[] = [
     },
     image: "/assets/case-studies/healthcare-data-integration-sap-btp.webp",
     fallbackImage: "/assets/card_sunset.webp",
-    icon: <Heart className="w-5 h-5 text-rose-400" />,
     caseStudySlug: "healthcare-data-integration-sap-btp"
   },
   {
@@ -234,8 +213,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       label: "Automated underwriting turnaround time"
     },
     image: "/assets/case-studies/sap-s4hana-migration-bfsi.webp",
-    fallbackImage: "/assets/card_sunset.webp",
-    icon: <CreditCard className="w-5 h-5 text-teal-400" />
+    fallbackImage: "/assets/card_sunset.webp"
   },
   {
     id: "oil-gas",
@@ -256,8 +234,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       label: "Reduction in field asset maintenance OPEX"
     },
     image: "/assets/case-studies/data-modernization-manufacturing.webp",
-    fallbackImage: "/assets/card_sunset.webp",
-    icon: <Fuel className="w-5 h-5 text-orange-400" />
+    fallbackImage: "/assets/card_sunset.webp"
   },
   {
     id: "pharma-biotech",
@@ -279,7 +256,6 @@ export const INDUSTRIES_DATA: IndustryData[] = [
     },
     image: "/assets/case-studies/pharma-data-compliance-automation.webp",
     fallbackImage: "/assets/card_sunset.webp",
-    icon: <Pill className="w-5 h-5 text-purple-400" />,
     caseStudySlug: "pharma-data-compliance-automation"
   },
   {
@@ -302,7 +278,6 @@ export const INDUSTRIES_DATA: IndustryData[] = [
     },
     image: "/assets/case-studies/cloud-modernization-telecom.webp",
     fallbackImage: "/assets/card_sunset.webp",
-    icon: <Radio className="w-5 h-5 text-blue-400" />,
     caseStudySlug: "cloud-modernization-telecom"
   }
 ];
@@ -370,7 +345,7 @@ export function IndustriesSection() {
                 {/* Hexagon Domain Badge & Eyebrow */}
                 <div className="flex items-center space-x-4">
                   {/* Hexagon Shape wrapper matching reference image */}
-                  <div className="relative w-14 h-14 shrink-0 flex items-center justify-center">
+                  <div className="relative w-14 h-14 shrink-0 flex items-center justify-center select-none">
                     <svg viewBox="0 0 100 100" className="w-full h-full text-slate-100 dark:text-[#141e2a] drop-shadow-md">
                       <polygon
                         points="50 3, 93 25, 93 75, 50 97, 7 75, 7 25"
@@ -380,8 +355,10 @@ export function IndustriesSection() {
                         strokeOpacity="0.7"
                       />
                     </svg>
-                    <div className="absolute inset-0 flex items-center justify-center text-slate-800 dark:text-white">
-                      {activeIndustry.icon}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="font-mono font-bold text-[#c2a675] text-[15px] tracking-wider">
+                        {String(activeIndex + 1).padStart(2, '0')}
+                      </span>
                     </div>
                   </div>
 
@@ -416,15 +393,12 @@ export function IndustriesSection() {
                 </div>
 
                 {/* Impact Metric Strip */}
-                <div className="flex items-center space-x-4 p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none backdrop-blur-sm">
-                  <div className="w-10 h-10 rounded-lg bg-[#c2a675]/15 border border-[#c2a675]/30 flex items-center justify-center text-[#c2a675] shrink-0">
-                    <TrendingUp className="w-5 h-5" />
-                  </div>
+                <div className="flex items-center space-x-4 p-4 rounded-xl bg-white dark:bg-white/[0.03] border-l-4 border-l-[#c2a675] border-y border-r border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none">
                   <div>
-                    <div className="text-xl sm:text-2xl font-black text-[#0b192c] dark:text-white tracking-tight">
+                    <div className="text-2xl sm:text-3xl font-black text-[#0b192c] dark:text-white tracking-tight">
                       {activeIndustry.impactMetric.value}
                     </div>
-                    <div className="text-slate-500 dark:text-slate-400 font-mono text-[11px] sm:text-[12px] tracking-wide">
+                    <div className="text-slate-500 dark:text-slate-400 font-mono text-[11px] sm:text-[12px] tracking-wide mt-0.5">
                       {activeIndustry.impactMetric.label}
                     </div>
                   </div>
@@ -456,37 +430,17 @@ export function IndustriesSection() {
           </div>
 
           {/* ========================================================
-              RIGHT COLUMN (lg:col-span-7): The Elastic Reel Dock
+              RIGHT COLUMN (lg:col-span-7): The Elastic Reel Dock (Unboxed)
               ======================================================== */}
           <div className="lg:col-span-7 relative">
-            <div className="relative w-full rounded-3xl p-3 sm:p-5 bg-white dark:bg-gradient-to-b dark:from-[#080d16] dark:to-[#04060b] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden">
-              
-              {/* Subtle Ambient Glow */}
-              <div 
-                className="absolute top-0 right-0 w-80 h-80 pointer-events-none"
-                style={{ background: 'radial-gradient(circle, rgba(194, 166, 117, 0.08) 0%, transparent 70%)' }}
-              />
-
-              {/* Header Label inside dock frame */}
-              <div className="flex items-center justify-between pb-3 px-2 border-b border-slate-200 dark:border-white/10 mb-2">
-                <div className="flex items-center space-x-2 text-[11px] font-mono tracking-wider uppercase text-slate-500 dark:text-slate-400">
-                  <span className="w-2 h-2 rounded-full bg-[#c2a675] inline-block shadow-[0_0_8px_rgba(194,166,117,0.7)]" />
-                  <span>INTERACTIVE INDUSTRY REEL</span>
-                </div>
-                <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
-                  HOVER OR CLICK SLICE TO EXPAND
-                </div>
-              </div>
-
-              {/* React Bits Pro Elastic Reel Component */}
-              <ElasticReel
-                items={INDUSTRIES_DATA}
-                activeIndex={activeIndex}
-                onActiveChange={setActiveIndex}
-                autoplay={true}
-                autoplayInterval={5500}
-              />
-            </div>
+            {/* React Bits Pro Elastic Reel Component sitting directly in the section */}
+            <ElasticReel
+              items={INDUSTRIES_DATA}
+              activeIndex={activeIndex}
+              onActiveChange={setActiveIndex}
+              autoplay={true}
+              autoplayInterval={5500}
+            />
           </div>
 
         </div>

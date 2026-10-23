@@ -119,7 +119,7 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
             ...m.parts,
             {
               type: 'text' as const,
-              content: `\n\n⚠️ ${errorMsg}`,
+              content: `\n\n[Notice]: ${errorMsg}`,
             },
           ],
         };
