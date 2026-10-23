@@ -1,6 +1,6 @@
-import heroImage from '../assets/hero.jpg';
-import heroSlide2Image from '../assets/hero-slide-2.jpg';
-import heroSlide3Image from '../assets/hero-slide-3.jpg';
+import heroImage from '../assets/hero.webp';
+import heroSlide2Image from '../assets/hero-slide-2.webp';
+import heroSlide3Image from '../assets/hero-slide-3.webp';
 
 import microsoftLogo from '../assets/logos/microsoft.svg';
 import sapLogo from '../assets/logos/sap.svg';
@@ -46,7 +46,7 @@ export const siteContent = {
   header: {
     logo: {
       brand: "AXIA",
-      trademark: "®",
+      trademark: "",
       sub: "KAIROS"
     },
     navLinks: [

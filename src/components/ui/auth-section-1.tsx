@@ -3,7 +3,7 @@
 import { GrainGradient } from "@paper-design/shaders-react";
 import { useState } from "react";
 import { loginAdmin, setStoredAdminSession } from "@/lib/api";
-import { ShieldCheck, Lock, User, AlertCircle, ArrowRight, Sparkles } from "lucide-react";
+import { ShieldCheck, Lock, User, AlertCircle, ArrowRight } from "lucide-react";
 
 interface AuthSectionOneProps {
   onSuccess?: (token: string, user: { username: string; role: string }) => void;
@@ -67,12 +67,6 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
         {/* Left Side: Auth Card */}
         <div className="flex min-h-[760px] items-center rounded-2xl border border-black/10 bg-white px-6 py-12 sm:px-10 dark:border-white/10 dark:bg-[#0a0a0a] lg:min-h-0 lg:px-14 lg:py-20 xl:px-20 shadow-sm">
           <div className="mx-auto w-full max-w-[540px]">
-            {/* Header Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs font-mono font-semibold tracking-wider uppercase mb-6">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              Axia Kairos Admin Console
-            </div>
-
             <div>
               <h1 className="text-3xl font-bold tracking-[-0.03em] sm:text-4xl lg:text-[42px] lg:leading-[1.1] text-zinc-900 dark:text-white">
                 Admin Authentication
@@ -85,7 +79,6 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
             {/* Quick Demo Pill */}
             <div className="mt-6 p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
               <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400">
-                <Sparkles className="w-4 h-4 text-rose-500 shrink-0" />
                 <span>
                   Authorized Credentials: <strong className="text-zinc-900 dark:text-white font-mono">admin</strong> / <strong className="text-zinc-900 dark:text-white font-mono">admin123</strong>
                 </span>
@@ -93,7 +86,7 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
               <button
                 type="button"
                 onClick={fillQuickCredentials}
-                className="text-xs font-semibold text-rose-500 hover:text-rose-600 underline underline-offset-2 ml-2 shrink-0 cursor-pointer"
+                className="text-xs font-semibold text-sky-500 hover:text-sky-600 underline underline-offset-2 ml-2 shrink-0 cursor-pointer"
               >
                 Auto-fill
               </button>
@@ -121,7 +114,7 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
                     value={userId}
                     onChange={(e) => setUserId(e.target.value)}
                     placeholder="admin"
-                    className="w-full h-13 rounded-xl border border-black/20 bg-zinc-50/50 dark:bg-zinc-900/60 dark:border-white/15 px-4 text-base text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500/15 transition-all font-mono"
+                    className="w-full h-13 rounded-xl border border-black/20 bg-zinc-50/50 dark:bg-zinc-900/60 dark:border-white/15 px-4 text-base text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/15 transition-all font-mono"
                   />
                 </div>
               </div>
@@ -139,7 +132,7 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full h-13 rounded-xl border border-black/20 bg-zinc-50/50 dark:bg-zinc-900/60 dark:border-white/15 px-4 text-base text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500/15 transition-all font-mono"
+                    className="w-full h-13 rounded-xl border border-black/20 bg-zinc-50/50 dark:bg-zinc-900/60 dark:border-white/15 px-4 text-base text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-600 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/15 transition-all font-mono"
                   />
                 </div>
               </div>
@@ -150,7 +143,7 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
                     type="checkbox"
                     checked={rememberMe}
                     onChange={(e) => setRememberMe(e.target.checked)}
-                    className="rounded border-zinc-300 dark:border-zinc-700 text-rose-500 focus:ring-rose-500 h-4 w-4"
+                    className="rounded border-zinc-300 dark:border-zinc-700 text-sky-500 focus:ring-sky-500 h-4 w-4"
                   />
                   <span>Keep me signed in</span>
                 </label>
@@ -192,7 +185,7 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
             noise={0.25}
             shape="corners"
             frame={2854.5}
-            colors={["#FFFFFF", "#FC7819", "#FC7819", "#FFFFFF"]}
+            colors={["#FFFFFF", "#38BDF8", "#7DD3FC", "#FFFFFF"]}
             colorBack="#00000000"
             className="absolute inset-0 bg-black"
           />
@@ -200,7 +193,7 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
           <div className="relative z-10 flex h-full w-full flex-col justify-between">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-mono uppercase tracking-wider text-white/90 mb-4">
-                <ShieldCheck className="w-3.5 h-3.5 text-orange-400" />
+                <ShieldCheck className="w-3.5 h-3.5 text-sky-400" />
                 Enterprise Command Center
               </div>
               <h2 className="max-w-[620px] pt-4 text-4xl font-bold tracking-[-0.04em] text-white sm:text-5xl lg:pt-10 lg:text-[56px] lg:leading-[1.02]">
@@ -215,7 +208,7 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
 
             <div className="pt-8">
               <div className="inline-flex items-center gap-3 rounded-xl border border-white/25 bg-black/40 px-5 py-3 text-sm font-medium text-white/90 backdrop-blur-md">
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse" />
                 <span>PostgreSQL Contact Pipeline Active</span>
               </div>
             </div>

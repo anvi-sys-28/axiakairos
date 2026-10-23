@@ -7,8 +7,14 @@ async function verifyAdmin() {
   const page = await context.newPage();
 
   console.log('Navigating to http://localhost:5173/admin ...');
-  await page.goto('http://localhost:5173/admin', { waitUntil: 'networkidle' });
-  await page.waitForTimeout(2000);
+  await page.goto('http://localhost:5173/admin', { waitUntil: 'domcontentloaded' });
+  await page.evaluate(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+  });
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await page.waitForSelector('form', { timeout: 10000 });
+  await page.waitForTimeout(1000);
 
   const artifactsDir = 'C:\\Users\\jashw\\.gemini\\antigravity\\brain\\50c50c10-7194-40c0-9d8c-9de54d39c98a';
   await page.screenshot({ path: path.join(artifactsDir, 'admin_login_page.png'), fullPage: true });
@@ -26,7 +32,7 @@ async function verifyAdmin() {
   // Now submit a message on /contact
   const contactPage = await context.newPage();
   console.log('Navigating to http://localhost:5173/contact ...');
-  await contactPage.goto('http://localhost:5173/contact', { waitUntil: 'networkidle' });
+  await contactPage.goto('http://localhost:5173/contact', { waitUntil: 'domcontentloaded' });
   await contactPage.waitForTimeout(3500); // Wait for preloader
 
   const nameInput = contactPage.locator('input[placeholder="Jane Doe"]');
@@ -45,7 +51,7 @@ async function verifyAdmin() {
 
   // Reload admin dashboard to see updated messages
   await page.bringToFront();
-  await page.reload({ waitUntil: 'networkidle' });
+  await page.reload({ waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(1500);
   await page.screenshot({ path: path.join(artifactsDir, 'admin_dashboard_with_new_inquiry.png'), fullPage: true });
   console.log('📸 Captured admin_dashboard_with_new_inquiry.png');

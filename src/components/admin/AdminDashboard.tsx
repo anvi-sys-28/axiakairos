@@ -173,7 +173,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-bold tracking-tight">Axia Kairos Admin</h1>
-              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider bg-rose-500/10 text-rose-500 border border-rose-500/20">
+              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider bg-sky-500/10 text-sky-500 border border-sky-500/20">
                 Portal
               </span>
             </div>
@@ -215,7 +215,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
             onClick={handleAddSample}
             className="h-9 px-3 gap-1.5 text-xs rounded-lg border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800"
           >
-            <PlusCircle className="w-3.5 h-3.5 text-rose-500" />
+            <PlusCircle className="w-3.5 h-3.5 text-sky-500" />
             <span className="hidden sm:inline">Test Message</span>
           </Button>
 
@@ -223,7 +223,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
             variant="outline"
             size="sm"
             onClick={onLogout}
-            className="h-9 px-3 gap-1.5 text-xs rounded-lg border-rose-200 dark:border-rose-900/40 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30"
+            className="h-9 px-3 gap-1.5 text-xs rounded-lg border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-rose-500 dark:hover:text-rose-400"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>Sign Out</span>
@@ -246,15 +246,15 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
             <div className="mt-1 text-[11px] text-zinc-400">All messages submitted</div>
           </div>
 
-          <div className="rounded-2xl border border-rose-200 dark:border-rose-900/30 bg-rose-50/50 dark:bg-rose-950/10 p-5 shadow-xs">
-            <div className="flex items-center justify-between text-xs font-semibold text-rose-600 dark:text-rose-400">
+          <div className="rounded-2xl border border-sky-200 dark:border-sky-900/40 bg-sky-50/50 dark:bg-sky-950/15 p-5 shadow-xs">
+            <div className="flex items-center justify-between text-xs font-semibold text-sky-600 dark:text-sky-400">
               <span>Needs Attention</span>
-              <Clock className="w-4 h-4 text-rose-500" />
+              <Clock className="w-4 h-4 text-sky-500" />
             </div>
-            <div className="mt-3 text-3xl font-bold tracking-tight text-rose-600 dark:text-rose-400">
+            <div className="mt-3 text-3xl font-bold tracking-tight text-sky-600 dark:text-sky-400">
               {stats.unread}
             </div>
-            <div className="mt-1 text-[11px] text-rose-500/80">Unread inquiries</div>
+            <div className="mt-1 text-[11px] text-sky-500/80">Unread inquiries</div>
           </div>
 
           <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#0c1017] p-5 shadow-xs">
@@ -290,7 +290,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
               placeholder="Search sender, company, email, or message..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-10 pl-10 pr-4 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500 transition-all"
+              className="w-full h-10 pl-10 pr-4 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"
             />
           </div>
 
@@ -340,7 +340,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-rose-500 hover:underline cursor-pointer"
+                className="text-sky-500 hover:underline cursor-pointer"
               >
                 Clear search
               </button>
@@ -349,7 +349,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
 
           {loading ? (
             <div className="py-20 text-center flex flex-col items-center justify-center gap-3">
-              <div className="w-8 h-8 rounded-full border-2 border-zinc-300 dark:border-zinc-700 border-t-rose-500 animate-spin" />
+              <div className="w-8 h-8 rounded-full border-2 border-zinc-300 dark:border-zinc-700 border-t-sky-500 animate-spin" />
               <p className="text-sm text-zinc-500">Loading inquiries from database...</p>
             </div>
           ) : filteredMessages.length === 0 ? (
@@ -371,7 +371,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
                 onClick={handleAddSample}
                 className="mt-2 text-xs rounded-xl"
               >
-                <PlusCircle className="w-3.5 h-3.5 mr-1.5 text-rose-500" />
+                <PlusCircle className="w-3.5 h-3.5 mr-1.5 text-sky-500" />
                 Add Sample Enterprise Inquiry
               </Button>
             </div>
@@ -385,7 +385,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
                     key={msg.id}
                     className={`rounded-2xl border transition-all duration-200 p-5 sm:p-6 bg-white dark:bg-[#0c1017] shadow-xs ${
                       isUnread
-                        ? 'border-rose-300/80 dark:border-rose-900/50 bg-rose-50/15 dark:bg-rose-950/5'
+                        ? 'border-sky-300/80 dark:border-sky-900/50 bg-sky-50/15 dark:bg-sky-950/5'
                         : 'border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700'
                     }`}
                   >
@@ -395,7 +395,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
                         <div
                           className={`w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm shrink-0 ${
                             isUnread
-                              ? 'bg-rose-500 text-white shadow-sm'
+                              ? 'bg-sky-500 text-white shadow-sm'
                               : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
                           }`}
                         >
@@ -421,7 +421,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
                             <span
                               className={`text-[11px] font-mono px-2 py-0.5 rounded uppercase font-semibold ${
                                 msg.status === 'unread'
-                                  ? 'bg-rose-500/10 text-rose-500 border border-rose-500/20'
+                                  ? 'bg-sky-500/10 text-sky-500 border border-sky-500/20'
                                   : msg.status === 'replied'
                                   ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
                                   : msg.status === 'archived'
@@ -438,7 +438,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
                               href={`mailto:${msg.email}?subject=${encodeURIComponent(
                                 'Axia Kairos Consultation Follow-up'
                               )}`}
-                              className="inline-flex items-center gap-1.5 hover:text-rose-500 transition-colors font-mono"
+                              className="inline-flex items-center gap-1.5 hover:text-sky-500 transition-colors font-mono"
                             >
                               <Mail className="w-3.5 h-3.5" />
                               {msg.email}
@@ -479,7 +479,7 @@ export default function AdminDashboard({ token, user, onLogout }: AdminDashboard
                             className="h-8 px-2.5 text-xs rounded-lg"
                             title="Mark as Unread"
                           >
-                            <Clock className="w-3.5 h-3.5 mr-1 text-rose-500" />
+                            <Clock className="w-3.5 h-3.5 mr-1 text-sky-500" />
                             Mark Unread
                           </Button>
                         )}

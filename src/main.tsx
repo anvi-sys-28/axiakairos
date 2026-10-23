@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
@@ -19,7 +19,38 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const AssistantPage = lazy(() => import('./features/assistant/AssistantPage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
-import { AssistantLauncher } from './features/assistant/AssistantLauncher';
+
+// Lazy-load AXIA Assistant chatbot so it loads only after the home page is idle
+const AssistantLauncher = lazy(() =>
+  import('./features/assistant/AssistantLauncher').then((m) => ({ default: m.AssistantLauncher }))
+);
+
+const DeferredAssistantLauncher = () => {
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      const handle = (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
+        () => setShouldLoad(true),
+        { timeout: 3500 }
+      );
+      return () => {
+        (window as Window & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(handle);
+      };
+    } else {
+      const timer = setTimeout(() => setShouldLoad(true), 2500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  if (!shouldLoad) return null;
+
+  return (
+    <Suspense fallback={null}>
+      <AssistantLauncher />
+    </Suspense>
+  );
+};
 
 const RouteLoader = () => (
   <div className="min-h-screen w-full flex items-center justify-center bg-white dark:bg-[#05080e]">
@@ -32,7 +63,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <BrowserRouter>
       <Preloader />
       <ScrollToTop />
-      <AssistantLauncher />
+      <DeferredAssistantLauncher />
       <Suspense fallback={<RouteLoader />}>
         <Routes>
           <Route path="/" element={<App />} />

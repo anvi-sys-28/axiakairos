@@ -17,6 +17,10 @@ const BrandLogo: React.FC<{ logo: { name: string; src: string; alt: string } }> 
     <img 
       src={logo.src} 
       alt={logo.alt} 
+      width={90}
+      height={24}
+      loading="lazy"
+      decoding="async"
       className="h-5 sm:h-6 w-auto object-contain select-none pointer-events-none opacity-85 hover:opacity-100 dark:invert dark:brightness-200 transition-opacity" 
     />
   );

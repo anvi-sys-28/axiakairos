@@ -133,7 +133,7 @@ async function testWhatsAppPreview() {
       <body>
         <div class="tab-mockup">
           <img class="tab-favicon" src="data:image/webp;base64,${webpBase64}" alt="tab favicon" />
-          <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">AXIA® KAIROS — Strategy that moves you forward.</span>
+          <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">AXIA KAIROS — Strategy that moves you forward.</span>
         </div>
 
         <div class="chat-bubble" style="margin-top: 50px;">
@@ -142,7 +142,7 @@ async function testWhatsAppPreview() {
               <img class="preview-img" src="data:image/webp;base64,${webpBase64}" alt="AXIA KAIROS Logo" />
             </div>
             <div class="preview-meta">
-              <div class="preview-title">AXIA® KAIROS — Strategy that moves you forward.</div>
+              <div class="preview-title">AXIA KAIROS — Strategy that moves you forward.</div>
               <div class="preview-desc">Axia Kairos Advisory &amp; Technology Group — Strategy that moves you forward. Cloud Platform Modernization, SAP S/4HANA Migrations, AI &amp; Managed Services.</div>
               <div class="preview-domain">axiakairos.com</div>
             </div>

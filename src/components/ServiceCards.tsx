@@ -84,7 +84,11 @@ export const ServiceCards: React.FC<ServiceCardsProps> = ({
           {/* Right Skyscraper Image (full height of card) */}
           <div className="absolute inset-y-0 right-0 w-[55%] pointer-events-none overflow-hidden">
             <img
-              src="/assets/card_sunset.jpg"
+              src="/assets/card_sunset.webp"
+              width={750}
+              height={500}
+              loading="lazy"
+              decoding="async"
               alt={currentService.title}
               className="w-full h-full object-cover object-right"
             />

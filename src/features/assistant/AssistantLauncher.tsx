@@ -162,15 +162,13 @@ export const AssistantLauncher: React.FC = () => {
 
             {/* ================= LEFT PANEL (Matches attached reference exactly) ================= */}
             <div className="hidden lg:flex lg:w-[44%] xl:w-[42%] flex-col justify-start p-8 xl:p-10 relative z-10 text-white select-text">
-              {/* Stacked AXIA® KAIROS Logo */}
+              {/* Stacked AXIA KAIROS Logo */}
               <div className="flex flex-col select-none mb-6">
                 <div className="flex items-start">
                   <span className="font-sans font-black text-[27px] xl:text-[29px] tracking-tight text-white leading-none">
                     AXIA
                   </span>
-                  <span className="text-[11px] font-sans font-semibold text-white ml-0.5 relative -top-1">
-                    ®
-                  </span>
+                  
                 </div>
                 <span className="font-sans font-bold text-[19px] xl:text-[21px] tracking-[0.06em] text-[#afcaea] mt-1 leading-none">
                   KAIROS

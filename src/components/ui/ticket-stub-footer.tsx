@@ -469,9 +469,7 @@ function CompanyLogo({ className, style, size = "md" }: { className?: string; st
         <span className={`font-extrabold tracking-tight font-sans ${isSm ? "text-[12px]" : "text-[18px] sm:text-[21px]"}`}>
           AXIA
         </span>
-        <span className={`font-bold ml-0.5 -mt-0.5 opacity-90 ${isSm ? "text-[6px]" : "text-[8.5px] sm:text-[9.5px]"}`}>
-          ®
-        </span>
+        
       </div>
       <span className={`font-semibold tracking-[0.28em] opacity-85 mt-0.5 ${isSm ? "text-[6px]" : "text-[8.5px] sm:text-[9.5px]"}`}>
         KAIROS
@@ -1260,4 +1258,4 @@ export default function TicketStubFooter({
 }
 
 export { TicketStubFooter }
-
+

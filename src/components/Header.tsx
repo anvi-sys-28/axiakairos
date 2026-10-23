@@ -18,10 +18,23 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
 
   const isHome = location.pathname === '/';
 
-  // Listen to scroll to transform navbar into a floating island
+  // Listen to scroll to transform navbar into a floating island (throttled with rAF, only updates when boolean changes)
   useEffect(() => {
+    let ticking = false;
+    let lastScrolled = typeof window !== 'undefined' && window.scrollY > 40;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const current = window.scrollY > 40;
+          if (current !== lastScrolled) {
+            setIsScrolled(current);
+            lastScrolled = current;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -111,7 +124,7 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
             : "max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 pt-5 sm:pt-6 pb-2 flex items-center justify-between"
         }
       >
-        {/* Left: Brand Logo (AXIA® / KAIROS) with animated StrokeText */}
+        {/* Left: Brand Logo (AXIA / KAIROS) with animated StrokeText */}
         <Link 
           to="/" 
           className="flex flex-col group select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-axia-slate rounded-sm shrink-0"
@@ -139,13 +152,15 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
                   hoverRedraw={false}
                 />
               </div>
-              <span
-                className={`font-bold ml-0.5 -mt-0.5 transition-colors text-[10.5px] sm:text-[11px] ${
-                  isDarkHero ? 'text-slate-300' : 'text-[#0b192c] dark:text-slate-300'
-                }`}
-              >
-                {logo.trademark}
-              </span>
+              {logo.trademark ? (
+                <span
+                  className={`font-bold ml-0.5 -mt-0.5 transition-colors text-[10.5px] sm:text-[11px] ${
+                    isDarkHero ? 'text-slate-300' : 'text-[#0b192c] dark:text-slate-300'
+                  }`}
+                >
+                  {logo.trademark}
+                </span>
+              ) : null}
             </div>
             <div className={`leading-tight ml-2.5 sm:ml-3 -mt-0.5 transition-colors ${
               isDarkHero ? 'text-slate-400' : 'text-[#6784a3] dark:text-slate-400'

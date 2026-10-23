@@ -41,12 +41,20 @@ export const Hero: React.FC<HeroProps> = ({
         <img
           src="/mb.webp"
           alt="Axia Kairos Luxury Penthouse Skyline"
+          width={750}
+          height={1334}
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-top block md:hidden"
         />
         {/* Desktop & Tablet: 1st slide image */}
         <img
           src={slides[0].image}
           alt="Axia Kairos Executive Space"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover object-right hidden md:block filter brightness-[0.98] dark:brightness-[0.88]"
         />
       </div>
