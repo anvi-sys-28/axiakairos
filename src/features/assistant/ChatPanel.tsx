@@ -182,8 +182,8 @@ export const ChatPanel = forwardRef<ChatPanelRef, ChatPanelProps>(
       <header className="px-5 py-4 border-b border-slate-200/80 flex items-center justify-between bg-white/80 shrink-0 relative z-20">
         <div className="flex items-center gap-3">
           {/* Circular navy avatar with white "A" mark */}
-          <div className="w-9 h-9 rounded-full bg-[#0b192c] text-white flex items-center justify-center font-serif font-black text-sm shadow-sm shrink-0">
-            A
+          <div className="w-9 h-9 rounded-full bg-[#0b192c] border border-slate-200/60 flex items-center justify-center overflow-hidden shadow-sm shrink-0">
+            <img src="/c.webp" alt="AXIA Assistant" className="w-full h-full object-cover object-top" />
           </div>
           <div className="text-left">
             <h3 className="font-serif text-sm font-bold tracking-tight text-slate-900 leading-none">

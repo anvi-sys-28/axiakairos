@@ -57,8 +57,8 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
     <div className="flex flex-col items-start my-3 space-y-1">
       <div className="flex items-start gap-2.5 max-w-full sm:max-w-[92%]">
         {/* Assistant Navy "A" Mark Avatar */}
-        <div className="w-8 h-8 rounded-full bg-[#0b192c] text-white flex items-center justify-center font-serif font-black text-xs shrink-0 shadow-sm mt-0.5">
-          A
+        <div className="w-8 h-8 rounded-full bg-[#0b192c] border border-slate-200/60 flex items-center justify-center overflow-hidden shrink-0 shadow-sm mt-0.5">
+          <img src="/c.webp" alt="AXIA Assistant" className="w-full h-full object-cover object-top" />
         </div>
 
         <div className="flex-1 min-w-0">

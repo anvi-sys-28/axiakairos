@@ -11,11 +11,37 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { logo, navLinks, cta } = siteContent.header;
 
   const isHome = location.pathname === '/';
+
+  // Listen to scroll so the top header subtly transitions background when scrolling past hero
+  useEffect(() => {
+    let ticking = false;
+    let lastScrolled = typeof window !== 'undefined' && window.scrollY > 20;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const current = window.scrollY > 20;
+          if (current !== lastScrolled) {
+            setIsScrolled(current);
+            lastScrolled = current;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Close mobile menu on route changes
   useEffect(() => {
@@ -76,11 +102,17 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
 
   return (
     <header
-      className="absolute top-0 left-0 right-0 z-40 w-full select-none bg-gradient-to-b from-white/20 to-transparent dark:from-[#05080e]/30 dark:to-transparent transition-all duration-300 ease-out"
+      className={`fixed top-0 left-0 right-0 z-40 w-full select-none transition-all duration-300 ease-out ${
+        isScrolled
+          ? 'bg-white/90 dark:bg-[#070e1b]/90 backdrop-blur-md border-b border-slate-200/60 dark:border-white/10 shadow-sm'
+          : 'bg-gradient-to-b from-white/20 to-transparent dark:from-[#05080e]/30 dark:to-transparent border-b border-transparent'
+      }`}
       aria-label="Site Header"
     >
-      {/* Standard Full-width Header Container */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 pt-5 sm:pt-6 pb-2 flex items-center justify-between">
+      {/* Standard Full-width Header Container - Visible across all sections without turning into a floating pill */}
+      <div className={`max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 flex items-center justify-between transition-all duration-200 ${
+        isScrolled ? 'py-3.5 sm:py-4' : 'pt-5 sm:pt-6 pb-2'
+      }`}>
         {/* Left: Brand Logo (AXIA / KAIROS) with animated StrokeText */}
         <Link 
           to="/" 
@@ -247,7 +279,7 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[68px] sm:top-[74px] bg-white/95 dark:bg-[#0c1626]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 shadow-xl px-6 py-6 z-50 flex flex-col space-y-4 animate-in slide-in-from-top duration-200">
+        <div className={`lg:hidden fixed inset-x-0 ${isScrolled ? 'top-[60px] sm:top-[66px]' : 'top-[68px] sm:top-[74px]'} bg-white/95 dark:bg-[#0c1626]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 shadow-xl px-6 py-6 z-50 flex flex-col space-y-4 animate-in slide-in-from-top duration-200`}>
           <nav className="flex flex-col space-y-3">
             {navLinks.map((link) => {
               const isInternal = link.href.startsWith('/') && !link.href.startsWith('/#');

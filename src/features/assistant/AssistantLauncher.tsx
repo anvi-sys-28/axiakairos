@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, Suspense, lazy } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Layers, FileText, Users, ArrowRight } from 'lucide-react';
-import chatbotAvatar from '../../assets/chatbot-avatar.jpg';
+// Robot chatbot avatar from public/c.webp
 import type { ChatPanelRef } from './ChatPanel';
 
 const ChatPanel = lazy(() =>
@@ -114,12 +114,8 @@ export const AssistantLauncher: React.FC = () => {
             </span>
 
             {/* Chatbot Image Avatar Icon */}
-            <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-md ring-1.5 ring-white/30 group-hover:ring-[#c2a675] group-hover:scale-105 transition-all duration-300">
-              <img
-                src={chatbotAvatar}
-                alt="AXIA AI Assistant"
-                className="w-full h-full object-cover"
-              />
+            <div className="relative w-11 h-11 rounded-full overflow-hidden shadow-md ring-2 ring-white/30 group-hover:ring-[#c2a675] group-hover:scale-105 transition-all duration-300 bg-[#0c1524] flex items-center justify-center">
+              <img src="/c.webp" alt="AXIA AI Assistant" className="w-full h-full object-cover object-top" />
             </div>
 
             {/* Flyout Tooltip on Hover */}
