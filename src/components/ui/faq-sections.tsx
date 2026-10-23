@@ -53,32 +53,32 @@ export const FaqSections = ({
   faqs = defaultFaqs,
   className,
 }: FaqSectionsProps) => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <div
       className={cn(
-        "max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-center gap-10 lg:gap-14 py-8",
+        "max-w-[1280px] mx-auto flex flex-col lg:flex-row items-center lg:items-start justify-between gap-10 lg:gap-12 xl:gap-16 py-6 sm:py-8",
         className
       )}
     >
-      {/* Left Media Column */}
-      <div className="w-full md:w-[360px] lg:w-[400px] shrink-0 flex justify-center">
+      {/* Left Media Column - Prominent rectangular showcase ("rectable and little big") */}
+      <div className="w-full lg:w-[480px] xl:w-[540px] shrink-0">
         <div className="relative group w-full rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-2xl bg-slate-100 dark:bg-[#0c1421]">
           <img
-            className="w-full h-[380px] sm:h-[440px] md:h-[480px] object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-[320px] sm:h-[380px] md:h-[420px] lg:h-[440px] object-cover transition-transform duration-500 group-hover:scale-105"
             src={imageSrc}
             alt="Axia Kairos Enterprise Advisory"
-            width={400}
-            height={480}
+            width={600}
+            height={440}
             loading="lazy"
             decoding="async"
             onError={(e) => {
               (e.target as HTMLImageElement).src = "/assets/card_sunset.webp";
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
-          <div className="absolute bottom-5 inset-x-5 text-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
+          <div className="absolute bottom-5 inset-x-6 text-white">
             <span className="font-mono text-[#c2a675] tracking-[0.2em] text-[11px] uppercase block mb-1">
               HAVE MORE QUESTIONS?
             </span>
