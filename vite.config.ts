@@ -35,11 +35,13 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
-              return 'vendor-react'
-            }
-            if (id.includes('framer-motion') || id.includes('motion')) {
-              return 'vendor-motion'
+            if (
+              id.includes('react') || 
+              id.includes('react-dom') || 
+              id.includes('react-router-dom') ||
+              id.includes('framer-motion')
+            ) {
+              return 'vendor-framework'
             }
             if (id.includes('gsap')) {
               return 'vendor-gsap'
