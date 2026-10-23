@@ -268,10 +268,62 @@
   animation: diamondFloat 14s ease-in-out infinite alternate -6s;
 }
 
-/* Tablet: hide d3 and d7, scale rest to ~70% */
+/* Variant for FAQ Section */
+.diamond.diamond-faq-1 {
+  width: 580px;
+  height: 580px;
+  right: -8%;
+  top: 4%;
+  opacity: 0.75;
+  animation-duration: 19s;
+  animation-delay: -4s;
+}
+
+.diamond.diamond-faq-2 {
+  width: 440px;
+  height: 440px;
+  left: 28%;
+  top: 32%;
+  opacity: 0.6;
+  animation-duration: 15s;
+  animation-delay: -8s;
+}
+
+.diamond.diamond-faq-3 {
+  width: 520px;
+  height: 520px;
+  left: -10%;
+  top: 42%;
+  opacity: 0.7;
+  animation-duration: 20s;
+  animation-delay: -2s;
+}
+
+.diamond.diamond-faq-4 {
+  width: 360px;
+  height: 360px;
+  right: 14%;
+  top: 62%;
+  opacity: 0.55;
+  animation-duration: 14s;
+  animation-delay: -6s;
+}
+
+.diamond.diamond-faq-5 {
+  width: 320px;
+  height: 320px;
+  left: 8%;
+  top: -4%;
+  opacity: 0.5;
+  animation-duration: 17s;
+  animation-delay: -10s;
+}
+
+/* Tablet: hide d3, d7, faq-5, scale rest to ~70% */
 @media (max-width: 1024px) {
   .diamond.d3,
-  .diamond.d7 {
+  .diamond.d7,
+  .diamond.diamond-faq-5 {
     display: none;
   }
   .diamond.d1 { width: 448px; height: 448px; }
@@ -279,19 +331,30 @@
   .diamond.d4 { width: 490px; height: 490px; }
   .diamond.d5 { width: 252px; height: 252px; }
   .diamond.d6 { width: 336px; height: 336px; }
+
+  .diamond.diamond-faq-1 { width: 406px; height: 406px; }
+  .diamond.diamond-faq-2 { width: 308px; height: 308px; }
+  .diamond.diamond-faq-3 { width: 364px; height: 364px; }
+  .diamond.diamond-faq-4 { width: 252px; height: 252px; }
 }
 
-/* Mobile: keep only d1, d4, d5, scale to ~50%, lower opacity */
+/* Mobile: keep only primary diamonds, scale to ~50%, lower opacity */
 @media (max-width: 640px) {
   .diamond.d2,
   .diamond.d3,
   .diamond.d6,
-  .diamond.d7 {
+  .diamond.d7,
+  .diamond.diamond-faq-2,
+  .diamond.diamond-faq-4,
+  .diamond.diamond-faq-5 {
     display: none;
   }
   .diamond.d1 { width: 320px; height: 320px; opacity: 0.4 !important; }
   .diamond.d4 { width: 350px; height: 350px; opacity: 0.4 !important; }
   .diamond.d5 { width: 180px; height: 180px; opacity: 0.4 !important; }
+
+  .diamond.diamond-faq-1 { width: 290px; height: 290px; opacity: 0.35 !important; }
+  .diamond.diamond-faq-3 { width: 260px; height: 260px; opacity: 0.35 !important; }
 }
 
 /* Reduced Motion */
