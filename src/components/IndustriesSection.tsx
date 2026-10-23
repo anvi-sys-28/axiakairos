@@ -295,7 +295,7 @@ export function IndustriesSection() {
   return (
     <div
       id="industries-we-serve"
-      className="diamond-zone w-full bg-[#f8f9fb] dark:bg-[#05080e] text-[#0b192c] dark:text-white py-20 sm:py-24 lg:py-28 scroll-mt-28 border-t border-slate-200 dark:border-white/10 transition-colors duration-300"
+      className="diamond-zone w-full text-[#0b192c] dark:text-white py-20 sm:py-24 lg:py-28 scroll-mt-28 border-t border-slate-200 dark:border-white/10 transition-colors duration-300"
     >
       {/* Decorative Overlapping Diamond Rhombus Backdrop */}
       <DiamondBackdrop variant="zone" />
@@ -319,7 +319,7 @@ export function IndustriesSection() {
             </h2>
           </div>
 
-          <p className="text-slate-600 dark:text-slate-400 text-[14.5px] sm:text-[15.5px] max-w-md leading-relaxed">
+          <p className="text-slate-700 dark:text-slate-300 text-[14.5px] sm:text-[15.5px] max-w-md leading-relaxed">
             Deep domain expertise across 12 regulated and fast-evolving global industries. We deliver purpose-engineered technology architectures that drive measurable enterprise impact.
           </p>
         </div>
@@ -376,7 +376,7 @@ export function IndustriesSection() {
                 </h3>
 
                 {/* Long Form Tailored Description */}
-                <p className="text-slate-600 dark:text-slate-300 text-[14.5px] sm:text-[15.5px] leading-relaxed">
+                <p className="text-slate-700 dark:text-slate-300 text-[14.5px] sm:text-[15.5px] leading-relaxed">
                   {activeIndustry.longDescription}
                 </p>
 
@@ -479,7 +479,7 @@ export function IndustriesSection() {
                 className={`inline-flex items-center px-4 py-1.5 rounded-full text-[12px] sm:text-[12.5px] font-medium transition-all duration-200 cursor-pointer select-none ${
                   isSelected
                     ? "bg-[#c2a675] text-[#05080e] font-semibold shadow-[0_0_15px_rgba(194,166,117,0.4)] scale-105"
-                    : "bg-white dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white border border-slate-300 dark:border-white/10 shadow-sm"
+                    : "bg-white/90 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 text-slate-800 dark:text-slate-200 hover:text-black dark:hover:text-white border border-slate-300/80 dark:border-white/15 shadow-sm backdrop-blur-sm"
                 }`}
               >
                 <span>{ind.title}</span>
