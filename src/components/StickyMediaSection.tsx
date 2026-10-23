@@ -9,7 +9,7 @@ import {
   ArrowUpRight, 
   ShieldCheck, 
   Globe, 
-  Sparkles,
+  Cpu,
   Layers
 } from 'lucide-react';
 import defaultPoster from '../assets/hero.webp';
@@ -55,16 +55,16 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
   descriptionSecondary = "With expertise across industries and markets, we simplify complexity, enhance performance, and deliver measurable outcomes, enabling clients to move from transformation vision to execution seamlessly.",
   videoUrl = "https://cdn.coverr.co/videos/coverr-cargo-ship-arriving-at-port-9268/1080p.mp4",
   posterUrl = "/assets/card_sunset.webp",
-  badgeText = "ABOUT AXIA KAIROS ▶",
+  badgeText = "ABOUT AXIA KAIROS",
   fleetTag = "ENTERPRISE TRANSFORMATION · GLOBAL ADVISORY",
   marqueeItems = [
-    "✦ SAP S/4HANA MIGRATION & ADVISORY",
-    "✦ CLOUD PLATFORM MODERNIZATION",
-    "✦ ENTERPRISE AI & AUTOMATION",
-    "✦ DATA ENGINEERING & ANALYTICS",
-    "✦ CYBER SECURITY & GOVERNANCE",
-    "✦ 24/7 MANAGED IT SERVICES",
-    "✦ STRATEGIC MANAGEMENT CONSULTING",
+    "SAP S/4HANA MIGRATION & ADVISORY",
+    "CLOUD PLATFORM MODERNIZATION",
+    "ENTERPRISE AI & AUTOMATION",
+    "DATA ENGINEERING & ANALYTICS",
+    "CYBER SECURITY & GOVERNANCE",
+    "24/7 MANAGED IT SERVICES",
+    "STRATEGIC MANAGEMENT CONSULTING",
   ],
   metrics = [
     { value: "15+", label: "YEARS EXCELLENCE" },
@@ -82,7 +82,7 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
     },
     {
       id: "ai-automation",
-      icon: <Sparkles className="w-5 h-5 text-sky-400" />,
+      icon: <Cpu className="w-5 h-5 text-sky-400" />,
       tag: "INTELLIGENT WORKFLOWS",
       title: "Enterprise AI & Business Automation",
       description: "Deploying secure enterprise agentic workflows, conversational intelligence, and automated decision orchestration across operations."
@@ -200,30 +200,32 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
     <section
       id={id}
       aria-label="About Axia Kairos"
-      className={`w-full bg-[#05080e] text-white py-16 sm:py-20 lg:py-24 border-t border-white/10 relative z-10 overflow-hidden ${className}`}
+      className={`w-full bg-slate-50 dark:bg-[#05080e] text-[#0b192c] dark:text-white py-16 sm:py-20 lg:py-24 border-t border-slate-200 dark:border-white/10 relative z-10 transition-colors duration-300 ${className}`}
     >
-      {/* Decorative ambient background geometric shapes inspired by brand design */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 rounded-3xl border border-white/[0.04] bg-gradient-to-br from-[#c2a675]/[0.03] to-transparent rotate-45 pointer-events-none blur-[1px]" />
-      <div className="absolute -top-16 -left-16 w-80 h-80 rounded-3xl border border-white/[0.05] bg-gradient-to-br from-white/[0.02] to-transparent rotate-45 pointer-events-none" />
-      <div 
-        className="absolute top-1/2 -right-40 w-[500px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(194, 166, 117, 0.04) 0%, rgba(14, 165, 233, 0.02) 40%, transparent 70%)' }}
-      />
+      {/* Decorative ambient background geometric shapes wrapped in overflow-hidden so section has overflow-visible */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-3xl border border-slate-300/[0.4] dark:border-white/[0.04] bg-gradient-to-br from-[#c2a675]/[0.05] dark:from-[#c2a675]/[0.03] to-transparent rotate-45 blur-[1px]" />
+        <div className="absolute -top-16 -left-16 w-80 h-80 rounded-3xl border border-slate-300/[0.4] dark:border-white/[0.05] bg-gradient-to-br from-slate-200/[0.3] dark:from-white/[0.02] to-transparent rotate-45" />
+        <div 
+          className="absolute top-1/2 -right-40 w-[500px] h-[500px]"
+          style={{ background: 'radial-gradient(circle, rgba(194, 166, 117, 0.05) 0%, rgba(14, 165, 233, 0.03) 40%, transparent 70%)' }}
+        />
+      </div>
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 relative z-10">
         
         {/* 12-Column CSS Grid - columns stretch to full height so sticky tracks across entire right-side scroll */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 relative items-start">
           
           {/* ========================================================
-              LEFT COLUMN (lg:col-span-7): Stretches to full section height
+              LEFT COLUMN (lg:col-span-7): Fixed / Sticky while right scrolls
               ======================================================== */}
-          <div className="lg:col-span-7 relative">
+          <div className="lg:col-span-7 relative self-stretch">
             {/* Sticky Wrapper: Pins at top-24 while right column scrolls */}
             <div className="lg:sticky lg:top-24 z-20">
               <div
                 ref={mediaContainerRef}
-                className="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-[#080d16] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] group transition-all duration-300 hover:border-white/20 h-[360px] sm:h-[440px] lg:h-[clamp(420px,calc(100vh-140px),550px)]"
+                className="relative w-full rounded-2xl overflow-hidden border border-slate-200 dark:border-white/10 bg-[#080d16] shadow-xl dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] group transition-all duration-300 hover:border-slate-300 dark:hover:border-white/20 h-[360px] sm:h-[440px] lg:h-[clamp(420px,calc(100vh-140px),550px)]"
               >
                 {/* HTML5 Video Player with Lazy Streaming & Poster Fallback */}
                 <video
@@ -263,17 +265,17 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
                     aria-label="Play showreel highlight"
                     className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] sm:text-[12px] tracking-wider uppercase shadow-xl hover:bg-black/90 hover:border-white/40 hover:scale-105 active:scale-95 transition-all duration-200 group/badge"
                   >
+                    <Play className="w-3 h-3 fill-white ml-0.5" />
                     <span className="text-white/90 font-medium">{badgeText}</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   </button>
                 </div>
 
                 {/* Bottom Controls Bar */}
                 <div className="absolute bottom-0 inset-x-0 p-4 sm:p-6 z-30 flex items-center justify-between pointer-events-auto bg-gradient-to-t from-black/90 via-black/50 to-transparent">
                   
-                  {/* Left side: Fleet / Brand Tag with Icon */}
+                  {/* Left side: Fleet / Brand Tag with Clean Dot Indicator */}
                   <div className="flex items-center space-x-2.5 px-3 py-1.5 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-white/85 text-[11px] sm:text-[12px] font-mono tracking-wider uppercase select-none">
-                    <Sparkles className="w-3.5 h-3.5 text-[#c2a675] shrink-0" aria-hidden="true" />
+                    <span className="w-2 h-2 rounded-full bg-[#c2a675] shrink-0" />
                     <span className="truncate max-w-[190px] sm:max-w-none">{fleetTag}</span>
                   </div>
 
@@ -330,17 +332,17 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
                 </div>
 
                 {/* Editorial Headline */}
-                <h2 className="text-3xl sm:text-4xl xl:text-[40px] font-bold text-white tracking-tight leading-[1.12]">
+                <h2 className="text-3xl sm:text-4xl xl:text-[40px] font-bold text-[#0b192c] dark:text-white tracking-tight leading-[1.12]">
                   {title}
                 </h2>
 
                 {/* Descriptive Paragraphs directly matching user reference */}
                 <div className="space-y-3.5 pt-1">
-                  <p className="text-slate-300 text-[14.5px] sm:text-[15.5px] leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-300 text-[14.5px] sm:text-[15.5px] leading-relaxed">
                     {description}
                   </p>
                   {descriptionSecondary && (
-                    <p className="text-slate-400 text-[14px] sm:text-[14.5px] leading-relaxed">
+                    <p className="text-slate-500 dark:text-slate-400 text-[14px] sm:text-[14.5px] leading-relaxed">
                       {descriptionSecondary}
                     </p>
                   )}
@@ -359,21 +361,21 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
               </div>
 
               {/* Infinite Monochromatic Marquee / Ticker */}
-              <div className="mt-6 pt-4 border-t border-white/10 group select-none overflow-hidden relative">
+              <div className="mt-6 pt-4 border-t border-slate-200 dark:border-white/10 group select-none overflow-hidden relative">
                 {/* Left/Right Subtle Gradient Mask for Marquee */}
-                <div className="absolute left-0 inset-y-0 w-8 bg-gradient-to-r from-[#05080e] to-transparent z-10 pointer-events-none" />
-                <div className="absolute right-0 inset-y-0 w-8 bg-gradient-to-l from-[#05080e] to-transparent z-10 pointer-events-none" />
+                <div className="absolute left-0 inset-y-0 w-8 bg-gradient-to-r from-slate-50 dark:from-[#05080e] to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 inset-y-0 w-8 bg-gradient-to-l from-slate-50 dark:from-[#05080e] to-transparent z-10 pointer-events-none" />
 
-                <div className="animate-ticker-left flex items-center space-x-6 text-[11px] sm:text-[12px] font-mono tracking-[0.16em] uppercase text-slate-400 whitespace-nowrap">
+                <div className="animate-ticker-left flex items-center space-x-6 text-[11px] sm:text-[12px] font-mono tracking-[0.16em] uppercase text-slate-500 dark:text-slate-400 whitespace-nowrap">
                   {/* First set */}
                   {marqueeItems.map((item, idx) => (
-                    <span key={`ticker-1-${idx}`} className="hover:text-white transition-colors cursor-default">
+                    <span key={`ticker-1-${idx}`} className="hover:text-[#0b192c] dark:hover:text-white transition-colors cursor-default">
                       {item}
                     </span>
                   ))}
                   {/* Duplicated set for seamless loop */}
                   {marqueeItems.map((item, idx) => (
-                    <span key={`ticker-2-${idx}`} className="hover:text-white transition-colors cursor-default" aria-hidden="true">
+                    <span key={`ticker-2-${idx}`} className="hover:text-[#0b192c] dark:hover:text-white transition-colors cursor-default" aria-hidden="true">
                       {item}
                     </span>
                   ))}
@@ -391,13 +393,13 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
               transition={{ duration: 0.5 }}
               className="w-full"
             >
-              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 border-y border-white/10 py-5 text-center bg-white/[0.02] rounded-xl">
+              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-200 dark:divide-white/10 border-y border-slate-200 dark:border-white/10 py-5 text-center bg-white dark:bg-white/[0.02] shadow-sm dark:shadow-none rounded-xl">
                 {metrics.map((metric, idx) => (
                   <div key={idx} className="px-3 sm:px-4 py-2 flex flex-col justify-center">
-                    <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    <div className="text-2xl sm:text-3xl font-extrabold text-[#0b192c] dark:text-white tracking-tight">
                       {metric.value}
                     </div>
-                    <div className="font-mono text-slate-400 tracking-[0.2em] text-[10px] sm:text-[11px] uppercase mt-1">
+                    <div className="font-mono text-slate-500 dark:text-slate-400 tracking-[0.2em] text-[10px] sm:text-[11px] uppercase mt-1">
                       {metric.label}
                     </div>
                   </div>
@@ -421,11 +423,11 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.45, delay: shouldReduceMotion ? 0 : index * 0.08 }}
-                  className="rounded-2xl p-5 sm:p-6 bg-[#0a0d14] border border-white/10 hover:border-white/30 transition-all duration-300 shadow-md hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] group"
+                  className="rounded-2xl p-5 sm:p-6 bg-white dark:bg-[#0a0d14] border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/30 transition-all duration-300 shadow-sm hover:shadow-md dark:shadow-md dark:hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] group"
                 >
                   <div className="flex items-start space-x-4">
                     {/* Icon Badge */}
-                    <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 group-hover:border-white/20 group-hover:scale-105 transition-all duration-300 shrink-0">
+                    <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 group-hover:border-slate-300 dark:group-hover:border-white/20 group-hover:scale-105 transition-all duration-300 shrink-0">
                       {capability.icon}
                     </div>
 
@@ -435,10 +437,10 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
                           {capability.tag}
                         </span>
                       )}
-                      <h3 className="text-[17px] sm:text-[18px] font-semibold text-white tracking-tight leading-snug group-hover:text-white transition-colors">
+                      <h3 className="text-[17px] sm:text-[18px] font-semibold text-[#0b192c] dark:text-white tracking-tight leading-snug group-hover:text-[#c2a675] dark:group-hover:text-white transition-colors">
                         {capability.title}
                       </h3>
-                      <p className="text-slate-400 text-[13.5px] sm:text-[14px] leading-relaxed">
+                      <p className="text-slate-600 dark:text-slate-400 text-[13.5px] sm:text-[14px] leading-relaxed">
                         {capability.description}
                       </p>
                     </div>
@@ -455,13 +457,13 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5 }}
-              className="rounded-2xl p-6 sm:p-7 bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/15 backdrop-blur-md shadow-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 group"
+              className="rounded-2xl p-6 sm:p-7 bg-white dark:bg-gradient-to-br dark:from-white/[0.08] dark:to-white/[0.02] border border-slate-200 dark:border-white/15 backdrop-blur-md shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 group"
             >
               <div className="flex flex-col space-y-1.5 max-w-[340px]">
-                <h4 className="text-[18px] sm:text-[19px] font-bold text-white tracking-tight leading-snug">
+                <h4 className="text-[18px] sm:text-[19px] font-bold text-[#0b192c] dark:text-white tracking-tight leading-snug">
                   {ctaHeadline}
                 </h4>
-                <p className="text-slate-400 text-[13px] sm:text-[13.5px] leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-400 text-[13px] sm:text-[13.5px] leading-relaxed">
                   {ctaSubtext}
                 </p>
               </div>

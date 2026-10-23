@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export interface ElasticReelItem {
   id: string;
@@ -154,7 +154,7 @@ export function ElasticReel({
                     {/* Top Row: Category Pill & Pulse */}
                     <div className="flex items-center justify-between">
                       <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#c2a675]/40 text-[#c2a675] font-mono text-[11px] sm:text-[12px] tracking-wider uppercase">
-                        <Sparkles className="w-3.5 h-3.5" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#c2a675] inline-block shadow-[0_0_6px_#c2a675]" />
                         <span>{item.tag}</span>
                       </div>
                       <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#34d399]" />

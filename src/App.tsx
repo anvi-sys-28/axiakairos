@@ -71,7 +71,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-[#05080e] text-axia-navy dark:text-slate-100 flex flex-col selection:bg-axia-slate/20 overflow-x-clip transition-colors duration-300">
+    <div className="min-h-screen w-full bg-white dark:bg-[#05080e] text-axia-navy dark:text-slate-100 flex flex-col selection:bg-axia-slate/20 transition-colors duration-300">
       <SEO
         title="AXIA KAIROS — Strategy that moves you forward."
         description="Axia Kairos Advisory & Technology Group — Strategy that moves you forward. Cloud Platform Modernization, SAP S/4HANA Migrations, AI & Managed Services."

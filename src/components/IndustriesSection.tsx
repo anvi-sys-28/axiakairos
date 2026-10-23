@@ -16,8 +16,7 @@ import {
   Radio,
   ArrowRight,
   CheckCircle2,
-  TrendingUp,
-  Sparkles
+  TrendingUp
 } from 'lucide-react';
 import { ElasticReel, type ElasticReelItem } from './ui/elastic-reel';
 
@@ -321,7 +320,7 @@ export function IndustriesSection() {
     <section
       id="industries-we-serve"
       aria-label="Industries We Serve"
-      className="w-full bg-[#05080e] text-white py-20 sm:py-24 lg:py-28 scroll-mt-28 border-t border-white/10 relative overflow-hidden"
+      className="w-full bg-[#f8f9fb] dark:bg-[#05080e] text-[#0b192c] dark:text-white py-20 sm:py-24 lg:py-28 scroll-mt-28 border-t border-slate-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300"
     >
       {/* Decorative ambient background glows - CSS radial gradients for 60fps rendering without blur-filter GPU rasterization */}
       <div 
@@ -342,12 +341,12 @@ export function IndustriesSection() {
               <span className="w-2 h-2 rounded-full bg-[#c2a675] inline-block shadow-[0_0_8px_rgba(194,166,117,0.7)]" />
               <span>INDUSTRIES WE SERVE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-[1.12]">
+            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#0b192c] dark:text-white tracking-tight leading-[1.12]">
               Specialized Transformation for Mission-Critical Sectors
             </h2>
           </div>
 
-          <p className="text-slate-400 text-[14.5px] sm:text-[15.5px] max-w-md leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-400 text-[14.5px] sm:text-[15.5px] max-w-md leading-relaxed">
             Deep domain expertise across 12 regulated and fast-evolving global industries. We deliver purpose-engineered technology architectures that drive measurable enterprise impact.
           </p>
         </div>
@@ -372,16 +371,16 @@ export function IndustriesSection() {
                 <div className="flex items-center space-x-4">
                   {/* Hexagon Shape wrapper matching reference image */}
                   <div className="relative w-14 h-14 shrink-0 flex items-center justify-center">
-                    <svg viewBox="0 0 100 100" className="w-full h-full text-[#141e2a] drop-shadow-lg">
+                    <svg viewBox="0 0 100 100" className="w-full h-full text-slate-100 dark:text-[#141e2a] drop-shadow-md">
                       <polygon
                         points="50 3, 93 25, 93 75, 50 97, 7 75, 7 25"
                         fill="currentColor"
                         stroke="#c2a675"
                         strokeWidth="2.5"
-                        strokeOpacity="0.6"
+                        strokeOpacity="0.7"
                       />
                     </svg>
-                    <div className="absolute inset-0 flex items-center justify-center text-white">
+                    <div className="absolute inset-0 flex items-center justify-center text-slate-800 dark:text-white">
                       {activeIndustry.icon}
                     </div>
                   </div>
@@ -390,26 +389,26 @@ export function IndustriesSection() {
                     <span className="font-mono text-[#c2a675] tracking-[0.18em] text-[11px] uppercase">
                       {activeIndustry.tag}
                     </span>
-                    <span className="font-bold text-white text-[17px] sm:text-[18px]">
+                    <span className="font-bold text-[#0b192c] dark:text-white text-[17px] sm:text-[18px]">
                       {activeIndustry.title}
                     </span>
                   </div>
                 </div>
 
                 {/* Main Headline */}
-                <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#0b192c] dark:text-white tracking-tight leading-snug">
                   {activeIndustry.headline}
                 </h3>
 
                 {/* Long Form Tailored Description */}
-                <p className="text-slate-300 text-[14.5px] sm:text-[15.5px] leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-300 text-[14.5px] sm:text-[15.5px] leading-relaxed">
                   {activeIndustry.longDescription}
                 </p>
 
                 {/* Key Strategic Focus Bullets */}
                 <div className="space-y-2.5 pt-1">
                   {activeIndustry.focusAreas.map((focus, idx) => (
-                    <div key={idx} className="flex items-start space-x-3 text-[13.5px] sm:text-[14px] text-slate-300">
+                    <div key={idx} className="flex items-start space-x-3 text-[13.5px] sm:text-[14px] text-slate-700 dark:text-slate-300">
                       <CheckCircle2 className="w-4 h-4 text-[#c2a675] shrink-0 mt-0.5" />
                       <span>{focus}</span>
                     </div>
@@ -417,15 +416,15 @@ export function IndustriesSection() {
                 </div>
 
                 {/* Impact Metric Strip */}
-                <div className="flex items-center space-x-4 p-4 rounded-xl bg-white/[0.03] border border-white/10 backdrop-blur-sm">
+                <div className="flex items-center space-x-4 p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none backdrop-blur-sm">
                   <div className="w-10 h-10 rounded-lg bg-[#c2a675]/15 border border-[#c2a675]/30 flex items-center justify-center text-[#c2a675] shrink-0">
                     <TrendingUp className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                    <div className="text-xl sm:text-2xl font-black text-[#0b192c] dark:text-white tracking-tight">
                       {activeIndustry.impactMetric.value}
                     </div>
-                    <div className="text-slate-400 font-mono text-[11px] sm:text-[12px] tracking-wide">
+                    <div className="text-slate-500 dark:text-slate-400 font-mono text-[11px] sm:text-[12px] tracking-wide">
                       {activeIndustry.impactMetric.label}
                     </div>
                   </div>
@@ -445,7 +444,7 @@ export function IndustriesSection() {
                   {activeIndustry.caseStudySlug && (
                     <Link
                       to={`/case-studies/${activeIndustry.caseStudySlug}`}
-                      className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-white font-medium text-[13.5px] transition-all hover:border-white/30"
+                      className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-full bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-800 dark:text-white font-medium text-[13.5px] transition-all hover:border-slate-400 dark:hover:border-white/30 shadow-sm"
                     >
                       <span>View Case Study</span>
                     </Link>
@@ -460,7 +459,7 @@ export function IndustriesSection() {
               RIGHT COLUMN (lg:col-span-7): The Elastic Reel Dock
               ======================================================== */}
           <div className="lg:col-span-7 relative">
-            <div className="relative w-full rounded-3xl p-3 sm:p-5 bg-gradient-to-b from-[#080d16] to-[#04060b] border border-white/10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden">
+            <div className="relative w-full rounded-3xl p-3 sm:p-5 bg-white dark:bg-gradient-to-b dark:from-[#080d16] dark:to-[#04060b] border border-slate-200 dark:border-white/10 shadow-xl dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] overflow-hidden">
               
               {/* Subtle Ambient Glow */}
               <div 
@@ -469,12 +468,12 @@ export function IndustriesSection() {
               />
 
               {/* Header Label inside dock frame */}
-              <div className="flex items-center justify-between pb-3 px-2 border-b border-white/10 mb-2">
-                <div className="flex items-center space-x-2 text-[11px] font-mono tracking-wider uppercase text-slate-400">
-                  <Sparkles className="w-3.5 h-3.5 text-[#c2a675]" />
+              <div className="flex items-center justify-between pb-3 px-2 border-b border-slate-200 dark:border-white/10 mb-2">
+                <div className="flex items-center space-x-2 text-[11px] font-mono tracking-wider uppercase text-slate-500 dark:text-slate-400">
+                  <span className="w-2 h-2 rounded-full bg-[#c2a675] inline-block shadow-[0_0_8px_rgba(194,166,117,0.7)]" />
                   <span>INTERACTIVE INDUSTRY REEL</span>
                 </div>
-                <div className="text-[11px] font-mono text-slate-400">
+                <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
                   HOVER OR CLICK SLICE TO EXPAND
                 </div>
               </div>
@@ -492,9 +491,9 @@ export function IndustriesSection() {
 
         </div>
 
-        {/* Quick Industry Navigation Hexagon Strip at bottom */}
-        <div className="mt-14 pt-8 border-t border-white/10">
-          <div className="text-center font-mono text-[11px] tracking-[0.2em] uppercase text-slate-400 mb-6">
+        {/* Quick Industry Navigation Strip at bottom - Clean text pills without emojis/icons */}
+        <div className="mt-14 pt-8 border-t border-slate-200 dark:border-white/10">
+          <div className="text-center font-mono text-[11px] tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-6">
             ALL 12 ENTERPRISE DOMAINS · QUICK NAVIGATION
           </div>
 
@@ -506,13 +505,12 @@ export function IndustriesSection() {
                   key={ind.id}
                   type="button"
                   onClick={() => setActiveIndex(idx)}
-                  className={`inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-[12px] sm:text-[12.5px] font-medium transition-all duration-200 cursor-pointer select-none ${
+                  className={`inline-flex items-center px-4 py-1.5 rounded-full text-[12px] sm:text-[12.5px] font-medium transition-all duration-200 cursor-pointer select-none ${
                     isSelected
                       ? "bg-[#c2a675] text-[#05080e] font-semibold shadow-[0_0_15px_rgba(194,166,117,0.4)] scale-105"
-                      : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10"
+                      : "bg-white dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white border border-slate-300 dark:border-white/10 shadow-sm"
                   }`}
                 >
-                  <span className="scale-75 shrink-0">{ind.icon}</span>
                   <span>{ind.title}</span>
                 </button>
               );
