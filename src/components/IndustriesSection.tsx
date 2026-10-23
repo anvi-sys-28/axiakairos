@@ -393,7 +393,7 @@ export function IndustriesSection() {
                 </div>
 
                 {/* Impact Metric Strip */}
-                <div className="flex items-center space-x-4 p-4 rounded-xl bg-white dark:bg-white/[0.03] border-l-4 border-l-[#c2a675] border-y border-r border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none">
+                <div className="flex items-center space-x-4 p-4 rounded-xl bg-white dark:bg-[#0c1421] border-l-4 border-l-[#c2a675] border-y border-r border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none">
                   <div>
                     <div className="text-2xl sm:text-3xl font-black text-[#0b192c] dark:text-white tracking-tight">
                       {activeIndustry.impactMetric.value}

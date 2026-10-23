@@ -39,6 +39,19 @@
     <meta name="twitter:image" content="/l.webp" />
     <!-- Self-hosted Inter font with preloading for instantaneous rendering without third-party network blocking -->
     <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="bg-white text-axia-navy antialiased selection:bg-axia-slate/20 selection:text-axia-navy font-sans">
     <div id="root"></div>

@@ -44,22 +44,31 @@ export function ElasticReel({
   const [scrollStart, setScrollStart] = useState(0);
   const [hasDragged, setHasDragged] = useState(false);
 
-  // Auto-scroll the container so the active slice stays centered inside the dock
-  // Using container.scrollTo WITHOUT touching the browser window scroll!
+  // Auto-scroll the container so the active slice is smoothly brought into full view
+  // Positioned with comfortable padding so NO box or text is EVER cut off on the left!
   useEffect(() => {
     const container = containerRef.current;
-    const slice = sliceRefs.current[activeIndex];
-    if (container && slice) {
-      const containerWidth = container.clientWidth;
-      const sliceLeft = slice.offsetLeft;
-      const sliceWidth = slice.clientWidth;
-      const targetScroll = sliceLeft - containerWidth / 2 + sliceWidth / 2;
+    if (!container) return;
+
+    const frameId = requestAnimationFrame(() => {
+      if (typeof window === "undefined") return;
+
+      const isMobile = window.innerWidth < 640;
+      const isTablet = window.innerWidth < 1024;
+      const inactiveWidth = isMobile ? 56 : (isTablet ? 68 : 74);
+      const gap = isMobile ? 10 : 14;
+      const sliceStep = inactiveWidth + gap;
+
+      // Position the active slice cleanly at the start with full padding
+      const targetScroll = activeIndex * sliceStep;
 
       container.scrollTo({
         left: Math.max(0, targetScroll),
         behavior: "smooth",
       });
-    }
+    });
+
+    return () => cancelAnimationFrame(frameId);
   }, [activeIndex]);
 
   // Autoplay ticker (pauses on hover or manual pause)
@@ -142,7 +151,7 @@ export function ElasticReel({
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUpOrLeave}
-        className="flex items-center gap-2.5 sm:gap-3.5 overflow-x-auto no-scrollbar py-3 px-1.5 scroll-smooth cursor-grab active:cursor-grabbing"
+        className="flex items-center gap-2.5 sm:gap-3.5 overflow-x-auto no-scrollbar py-3.5 px-4 sm:px-6 cursor-grab active:cursor-grabbing"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {items.map((item, index) => {
@@ -305,7 +314,7 @@ export function ElasticReel({
             onClick={toggleManualPause}
             aria-label={manualPause ? "Resume autoplay" : "Pause autoplay"}
             title={manualPause ? "Resume autoplay" : "Pause autoplay"}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-200/80 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/15 border border-slate-300 dark:border-white/15 flex items-center justify-center text-slate-700 dark:text-white active:scale-90 transition-all cursor-pointer shadow-sm"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-200/80 dark:bg-[#0c1421] hover:bg-slate-300 dark:hover:bg-white/15 border border-slate-300 dark:border-white/15 flex items-center justify-center text-slate-700 dark:text-white active:scale-90 transition-all cursor-pointer shadow-sm"
           >
             {manualPause ? <Play className="w-3.5 h-3.5 ml-0.5" /> : <Pause className="w-3.5 h-3.5" />}
           </button>
@@ -315,7 +324,7 @@ export function ElasticReel({
             type="button"
             onClick={handlePrev}
             aria-label="Previous industry"
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-200/80 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/15 border border-slate-300 dark:border-white/15 flex items-center justify-center text-slate-700 dark:text-white active:scale-90 transition-all cursor-pointer shadow-sm"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-200/80 dark:bg-[#0c1421] hover:bg-slate-300 dark:hover:bg-white/15 border border-slate-300 dark:border-white/15 flex items-center justify-center text-slate-700 dark:text-white active:scale-90 transition-all cursor-pointer shadow-sm"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
@@ -325,7 +334,7 @@ export function ElasticReel({
             type="button"
             onClick={handleNext}
             aria-label="Next industry"
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-200/80 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/15 border border-slate-300 dark:border-white/15 flex items-center justify-center text-slate-700 dark:text-white active:scale-90 transition-all cursor-pointer shadow-sm"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-200/80 dark:bg-[#0c1421] hover:bg-slate-300 dark:hover:bg-white/15 border border-slate-300 dark:border-white/15 flex items-center justify-center text-slate-700 dark:text-white active:scale-90 transition-all cursor-pointer shadow-sm"
           >
             <ArrowRight className="w-4 h-4" />
           </button>

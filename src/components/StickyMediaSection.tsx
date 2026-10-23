@@ -385,7 +385,7 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
               transition={{ duration: 0.5 }}
               className="w-full"
             >
-              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-200 dark:divide-white/10 border-y border-slate-200 dark:border-white/10 py-5 text-center bg-white dark:bg-white/[0.02] shadow-sm dark:shadow-none rounded-xl">
+              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-200 dark:divide-white/10 border-y border-slate-200 dark:border-white/10 py-5 text-center bg-white dark:bg-[#0c1421] shadow-sm dark:shadow-none rounded-xl">
                 {metrics.map((metric, idx) => (
                   <div key={idx} className="px-3 sm:px-4 py-2 flex flex-col justify-center">
                     <div className="text-2xl sm:text-3xl font-extrabold text-[#0b192c] dark:text-white tracking-tight">
@@ -448,13 +448,13 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5 }}
-              className="rounded-2xl p-6 sm:p-7 bg-white dark:bg-gradient-to-br dark:from-white/[0.08] dark:to-white/[0.02] border border-slate-200 dark:border-white/15 backdrop-blur-md shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 group"
+              className="rounded-2xl p-6 sm:p-7 bg-white dark:bg-[#0c1421] border border-slate-200 dark:border-white/15 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 group"
             >
               <div className="flex flex-col space-y-1.5 max-w-[340px]">
                 <h4 className="text-[18px] sm:text-[19px] font-bold text-[#0b192c] dark:text-white tracking-tight leading-snug">
                   {ctaHeadline}
                 </h4>
-                <p className="text-slate-600 dark:text-slate-400 text-[13px] sm:text-[13.5px] leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-300 text-[13px] sm:text-[13.5px] leading-relaxed">
                   {ctaSubtext}
                 </p>
               </div>
