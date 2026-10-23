@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import AuthSectionOne from '@/components/ui/auth-section-1';
-import AdminDashboard from '@/components/admin/AdminDashboard';
+import StrapiAdminDashboard from '@/components/admin/StrapiAdminDashboard';
 import { getStoredAdminToken, getStoredAdminUser, clearStoredAdminSession } from '@/lib/api';
 import { SEO } from '@/components/SEO';
 
@@ -48,7 +48,7 @@ export default function AdminPage() {
           description="Confidential enterprise management and inquiry portal."
           ogImage="/l.webp"
         />
-        <AdminDashboard token={token} user={user} onLogout={handleLogout} />
+        <StrapiAdminDashboard token={token} user={user} onLogout={handleLogout} />
       </>
     );
   }

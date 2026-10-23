@@ -255,3 +255,16 @@ export async function seedTestInquiry(token: string): Promise<ContactMessageReco
     return null;
   }
 }
+
+// Re-export CMS Management functions and types
+export {
+  loadCMSData,
+  saveCMSData,
+  resetCMSData,
+  exportCMSData,
+  importCMSData,
+  CMS_STORAGE_KEY,
+  CMS_UPDATE_EVENT,
+  type CMSData,
+} from './cmsStore';
+
