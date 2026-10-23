@@ -50,7 +50,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "38%",
       label: "Reduction in unplanned machine downtime"
     },
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/manufacturing-automation-sap-btp.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <Factory className="w-5 h-5 text-[#c2a675]" />,
     caseStudySlug: "manufacturing-automation-sap-btp"
@@ -73,7 +73,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "99.999%",
       label: "Platform uptime across transactional ledgers"
     },
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/sap-s4hana-migration-bfsi.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <Landmark className="w-5 h-5 text-sky-400" />,
     caseStudySlug: "sap-s4hana-migration-bfsi"
@@ -96,7 +96,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "28%",
       label: "Faster aircraft turnaround & MRO dispatch"
     },
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/logistics-sap-automation-integration.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <Plane className="w-5 h-5 text-indigo-400" />,
     caseStudySlug: "logistics-sap-automation-integration"
@@ -119,7 +119,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "3.2x",
       label: "Peak holiday checkout velocity & scale"
     },
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/cloud-modernization-retail.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <ShoppingCart className="w-5 h-5 text-emerald-400" />,
     caseStudySlug: "cloud-modernization-retail"
@@ -142,7 +142,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "500k+",
       label: "Concurrent active learners supported globally"
     },
-    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/public-sector-data-analytics-automation.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <GraduationCap className="w-5 h-5 text-amber-400" />
   },
@@ -164,7 +164,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "100%",
       label: "Compliance with sovereign security frameworks"
     },
-    image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/public-sector-data-analytics-automation.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <Building2 className="w-5 h-5 text-cyan-400" />,
     caseStudySlug: "public-sector-data-analytics-automation"
@@ -187,7 +187,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "42%",
       label: "Faster outage localization & grid restoration"
     },
-    image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/sap-s-4-hana-migration-and-data-governance-modernization-for-a-global-energy-and-utilities-enterprise.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <Zap className="w-5 h-5 text-yellow-400" />,
     caseStudySlug: "sap-s-4-hana-migration-and-data-governance-modernization-for-a-global-energy-and-utilities-enterprise"
@@ -210,7 +210,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "99.9%",
       label: "Clinical record integration accuracy & privacy"
     },
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/healthcare-data-integration-sap-btp.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <Heart className="w-5 h-5 text-rose-400" />,
     caseStudySlug: "healthcare-data-integration-sap-btp"
@@ -233,7 +233,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "<45s",
       label: "Automated underwriting turnaround time"
     },
-    image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/sap-s4hana-migration-bfsi.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <CreditCard className="w-5 h-5 text-teal-400" />
   },
@@ -255,7 +255,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "26%",
       label: "Reduction in field asset maintenance OPEX"
     },
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/data-modernization-manufacturing.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <Fuel className="w-5 h-5 text-orange-400" />
   },
@@ -277,7 +277,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "100%",
       label: "GxP and FDA regulatory audit validation"
     },
-    image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/pharma-data-compliance-automation.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <Pill className="w-5 h-5 text-purple-400" />,
     caseStudySlug: "pharma-data-compliance-automation"
@@ -300,7 +300,7 @@ export const INDUSTRIES_DATA: IndustryData[] = [
       value: "10M+",
       label: "Concurrent streaming subscribers sustained"
     },
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80",
+    image: "/assets/case-studies/cloud-modernization-telecom.webp",
     fallbackImage: "/assets/card_sunset.webp",
     icon: <Radio className="w-5 h-5 text-blue-400" />,
     caseStudySlug: "cloud-modernization-telecom"
