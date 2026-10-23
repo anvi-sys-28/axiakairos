@@ -9,6 +9,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import defaultPoster from '../assets/hero.webp';
+import { DiamondBackdrop } from './ui/diamond-backdrop';
 
 export interface StickyFeatureMetric {
   value: string;
@@ -194,14 +195,9 @@ export const StickyMediaSection: React.FC<StickyMediaSectionProps> = ({
       aria-label="About Axia Kairos"
       className={`w-full bg-slate-50 dark:bg-[#05080e] text-[#0b192c] dark:text-white py-16 sm:py-20 lg:py-24 border-t border-slate-200 dark:border-white/10 relative z-10 transition-colors duration-300 ${className}`}
     >
-      {/* Decorative ambient background geometric shapes wrapped in overflow-hidden so section has overflow-visible */}
+      {/* Reusable decorative diamond backdrop matching site theme tokens */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-3xl border border-slate-300/[0.4] dark:border-white/[0.04] bg-gradient-to-br from-[#c2a675]/[0.05] dark:from-[#c2a675]/[0.03] to-transparent rotate-45 blur-[1px]" />
-        <div className="absolute -top-16 -left-16 w-80 h-80 rounded-3xl border border-slate-300/[0.4] dark:border-white/[0.05] bg-gradient-to-br from-slate-200/[0.3] dark:from-white/[0.02] to-transparent rotate-45" />
-        <div 
-          className="absolute top-1/2 -right-40 w-[500px] h-[500px]"
-          style={{ background: 'radial-gradient(circle, rgba(194, 166, 117, 0.05) 0%, rgba(14, 165, 233, 0.03) 40%, transparent 70%)' }}
-        />
+        <DiamondBackdrop variant="about" />
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 relative z-10">

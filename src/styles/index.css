@@ -23,6 +23,18 @@
   --color-card-bg: rgba(11, 23, 40, 0.70);
   --color-card-border: rgba(255, 255, 255, 0.12);
   --color-body-grey: #556579;
+
+  /* Decorative diamond pattern theme tokens (Light theme) */
+  --pattern-fill: rgba(191, 160, 100, 0.07);
+  --pattern-border: rgba(191, 160, 100, 0.18);
+  --pattern-glow: rgba(191, 160, 100, 0.10);
+}
+
+.dark {
+  /* Decorative diamond pattern theme tokens (Dark theme) */
+  --pattern-fill: rgba(255, 255, 255, 0.045);
+  --pattern-border: rgba(255, 255, 255, 0.07);
+  --pattern-glow: rgba(212, 175, 90, 0.08);
 }
 
 @layer base {
@@ -99,5 +111,194 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+/* ========================================================
+   Decorative Diamond Rhombus Backdrop System
+   ======================================================== */
+
+@keyframes diamondFloat {
+  from {
+    translate: 0 -10px;
+  }
+  to {
+    translate: 0 12px;
+  }
+}
+
+.diamond-zone {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.diamond-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.diamond-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(60% 50% at 30% 40%, var(--pattern-glow), transparent 70%);
+}
+
+.diamond-zone > section {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+.diamond {
+  position: absolute;
+  border-radius: 48px;
+  background: var(--pattern-fill);
+  border: 1px solid var(--pattern-border);
+  transform: rotate(45deg) scaleY(0.62);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: diamondFloat 16s ease-in-out infinite alternate;
+  will-change: translate;
+}
+
+/* 7 Overlapping Diamond Rhombus Shapes */
+.diamond.d1 {
+  width: 640px;
+  height: 640px;
+  left: -12%;
+  top: 4%;
+  opacity: 0.9;
+  animation-duration: 18s;
+  animation-delay: -3s;
+}
+
+.diamond.d2 {
+  width: 420px;
+  height: 420px;
+  left: 18%;
+  top: 22%;
+  opacity: 0.7;
+  animation-duration: 14s;
+  animation-delay: -7s;
+}
+
+.diamond.d3 {
+  width: 520px;
+  height: 520px;
+  left: 42%;
+  top: 8%;
+  opacity: 0.55;
+  animation-duration: 21s;
+  animation-delay: -11s;
+}
+
+.diamond.d4 {
+  width: 700px;
+  height: 700px;
+  right: -10%;
+  top: 30%;
+  opacity: 0.8;
+  animation-duration: 16s;
+  animation-delay: -4s;
+}
+
+.diamond.d5 {
+  width: 360px;
+  height: 360px;
+  left: 30%;
+  top: 52%;
+  opacity: 0.7;
+  animation-duration: 13s;
+  animation-delay: -9s;
+}
+
+.diamond.d6 {
+  width: 480px;
+  height: 480px;
+  right: 18%;
+  top: 58%;
+  opacity: 0.6;
+  animation-duration: 19s;
+  animation-delay: -2s;
+}
+
+.diamond.d7 {
+  width: 300px;
+  height: 300px;
+  left: 6%;
+  top: 70%;
+  opacity: 0.5;
+  animation-duration: 15s;
+  animation-delay: -6s;
+}
+
+/* Variant for About Axia Kairos Section */
+.diamond-about-1 {
+  position: absolute;
+  top: -8rem;
+  left: -8rem;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 36px;
+  border: 1px solid var(--pattern-border);
+  background: var(--pattern-fill);
+  transform: rotate(45deg) scaleY(0.62);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: diamondFloat 18s ease-in-out infinite alternate;
+}
+
+.diamond-about-2 {
+  position: absolute;
+  top: -4rem;
+  left: -4rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 36px;
+  border: 1px solid var(--pattern-border);
+  background: var(--pattern-fill);
+  opacity: 0.7;
+  transform: rotate(45deg) scaleY(0.62);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: diamondFloat 14s ease-in-out infinite alternate -6s;
+}
+
+/* Tablet: hide d3 and d7, scale rest to ~70% */
+@media (max-width: 1024px) {
+  .diamond.d3,
+  .diamond.d7 {
+    display: none;
+  }
+  .diamond.d1 { width: 448px; height: 448px; }
+  .diamond.d2 { width: 294px; height: 294px; }
+  .diamond.d4 { width: 490px; height: 490px; }
+  .diamond.d5 { width: 252px; height: 252px; }
+  .diamond.d6 { width: 336px; height: 336px; }
+}
+
+/* Mobile: keep only d1, d4, d5, scale to ~50%, lower opacity */
+@media (max-width: 640px) {
+  .diamond.d2,
+  .diamond.d3,
+  .diamond.d6,
+  .diamond.d7 {
+    display: none;
+  }
+  .diamond.d1 { width: 320px; height: 320px; opacity: 0.4 !important; }
+  .diamond.d4 { width: 350px; height: 350px; opacity: 0.4 !important; }
+  .diamond.d5 { width: 180px; height: 180px; opacity: 0.4 !important; }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .diamond,
+  .diamond-about-1,
+  .diamond-about-2 {
+    animation: none !important;
   }
 }

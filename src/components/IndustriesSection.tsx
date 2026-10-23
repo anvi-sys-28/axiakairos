@@ -6,6 +6,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { ElasticReel, type ElasticReelItem } from './ui/elastic-reel';
+import { DiamondBackdrop } from './ui/diamond-backdrop';
 
 export interface IndustryData extends ElasticReelItem {
   headline: string;
@@ -292,23 +293,20 @@ export function IndustriesSection() {
   };
 
   return (
-    <section
+    <div
       id="industries-we-serve"
-      aria-label="Industries We Serve"
-      className="w-full bg-[#f8f9fb] dark:bg-[#05080e] text-[#0b192c] dark:text-white py-20 sm:py-24 lg:py-28 scroll-mt-28 border-t border-slate-200 dark:border-white/10 relative overflow-hidden transition-colors duration-300"
+      className="diamond-zone w-full bg-[#f8f9fb] dark:bg-[#05080e] text-[#0b192c] dark:text-white py-20 sm:py-24 lg:py-28 scroll-mt-28 border-t border-slate-200 dark:border-white/10 transition-colors duration-300"
     >
-      {/* Decorative ambient background glows - CSS radial gradients for 60fps rendering without blur-filter GPU rasterization */}
-      <div 
-        className="absolute top-0 right-1/4 w-[600px] h-[600px] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(194, 166, 117, 0.05) 0%, transparent 70%)' }}
-      />
-      <div 
-        className="absolute bottom-0 left-10 w-[500px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(14, 165, 233, 0.04) 0%, transparent 70%)' }}
-      />
+      {/* Decorative Overlapping Diamond Rhombus Backdrop */}
+      <DiamondBackdrop variant="zone" />
 
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 relative z-10">
-        
+      {/* ========================================================
+          SECTION A: "Industries We Serve" Showcase
+          ======================================================== */}
+      <section
+        className="industries relative z-10 bg-transparent max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16"
+        aria-label="Industries We Serve"
+      >
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div className="max-w-2xl">
@@ -444,36 +442,54 @@ export function IndustriesSection() {
           </div>
 
         </div>
+      </section>
 
-        {/* Quick Industry Navigation Strip at bottom - Clean text pills without emojis/icons */}
-        <div className="mt-14 pt-8 border-t border-slate-200 dark:border-white/10">
-          <div className="text-center font-mono text-[11px] tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-6">
-            ALL 12 ENTERPRISE DOMAINS · QUICK NAVIGATION
-          </div>
+      {/* ========================================================
+          Seamless Transition Divider: Faint gradient line
+          ======================================================== */}
+      <div 
+        className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 my-10 sm:my-14 relative z-10" 
+        aria-hidden="true"
+      >
+        <div 
+          className="h-px w-full" 
+          style={{ background: 'linear-gradient(90deg, transparent, var(--pattern-border), transparent)' }} 
+        />
+      </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 max-w-5xl mx-auto">
-            {INDUSTRIES_DATA.map((ind, idx) => {
-              const isSelected = idx === activeIndex;
-              return (
-                <button
-                  key={ind.id}
-                  type="button"
-                  onClick={() => setActiveIndex(idx)}
-                  className={`inline-flex items-center px-4 py-1.5 rounded-full text-[12px] sm:text-[12.5px] font-medium transition-all duration-200 cursor-pointer select-none ${
-                    isSelected
-                      ? "bg-[#c2a675] text-[#05080e] font-semibold shadow-[0_0_15px_rgba(194,166,117,0.4)] scale-105"
-                      : "bg-white dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white border border-slate-300 dark:border-white/10 shadow-sm"
-                  }`}
-                >
-                  <span>{ind.title}</span>
-                </button>
-              );
-            })}
-          </div>
+      {/* ========================================================
+          SECTION B: "ALL 12 ENTERPRISE DOMAINS · QUICK NAVIGATION"
+          ======================================================== */}
+      <section 
+        className="domain-nav relative z-10 bg-transparent max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16"
+        aria-label="Enterprise Domains Navigation"
+      >
+        <div className="text-center font-mono text-[11px] tracking-[0.2em] uppercase text-slate-500 dark:text-slate-400 mb-6">
+          ALL 12 ENTERPRISE DOMAINS · QUICK NAVIGATION
         </div>
 
-      </div>
-    </section>
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 max-w-5xl mx-auto">
+          {INDUSTRIES_DATA.map((ind, idx) => {
+            const isSelected = idx === activeIndex;
+            return (
+              <button
+                key={ind.id}
+                type="button"
+                onClick={() => setActiveIndex(idx)}
+                className={`inline-flex items-center px-4 py-1.5 rounded-full text-[12px] sm:text-[12.5px] font-medium transition-all duration-200 cursor-pointer select-none ${
+                  isSelected
+                    ? "bg-[#c2a675] text-[#05080e] font-semibold shadow-[0_0_15px_rgba(194,166,117,0.4)] scale-105"
+                    : "bg-white dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white border border-slate-300 dark:border-white/10 shadow-sm"
+                }`}
+              >
+                <span>{ind.title}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+    </div>
   );
 }
 
