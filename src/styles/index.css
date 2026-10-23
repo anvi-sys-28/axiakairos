@@ -31,43 +31,43 @@
   --hero-slate: #3E5A85;
   --hero-cream: #FBF6EC;
 
-  /* Diamond Zone - Hero-aligned Palette (Light Theme) */
+  /* Diamond Zone - Hero-aligned Palette (Light Theme - Subtle 10% Visibility) */
   --zone-bg:
-    radial-gradient(60% 50% at 85% 20%, rgba(227, 176, 91, 0.22), transparent 70%),
-    radial-gradient(55% 45% at 10% 80%, rgba(62, 90, 133, 0.14), transparent 70%),
-    linear-gradient(180deg, #FBF8F2 0%, #F4F1EA 50%, #EEF0F4 100%);
+    radial-gradient(60% 50% at 85% 20%, rgba(227, 176, 91, 0.05), transparent 70%),
+    radial-gradient(55% 45% at 10% 80%, rgba(62, 90, 133, 0.035), transparent 70%),
+    linear-gradient(180deg, #fdfcf9 0%, #f9f9f7 50%, #f4f5f8 100%);
 
-  --diamond-warm-fill: linear-gradient(135deg, rgba(227, 176, 91, 0.38) 0%, rgba(185, 133, 74, 0.16) 55%, rgba(185, 133, 74, 0.04) 100%);
-  --diamond-warm-border: rgba(185, 133, 74, 0.35);
-  --diamond-warm-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.55), 0 30px 80px rgba(227, 176, 91, 0.22);
+  --diamond-warm-fill: linear-gradient(135deg, rgba(227, 176, 91, 0.08) 0%, rgba(185, 133, 74, 0.04) 55%, rgba(185, 133, 74, 0.01) 100%);
+  --diamond-warm-border: rgba(185, 133, 74, 0.09);
+  --diamond-warm-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.30), 0 15px 40px rgba(227, 176, 91, 0.04);
 
-  --diamond-cool-fill: linear-gradient(135deg, rgba(62, 90, 133, 0.26) 0%, rgba(15, 27, 45, 0.10) 60%, rgba(15, 27, 45, 0.02) 100%);
-  --diamond-cool-border: rgba(62, 90, 133, 0.30);
-  --diamond-cool-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.40);
+  --diamond-cool-fill: linear-gradient(135deg, rgba(62, 90, 133, 0.07) 0%, rgba(15, 27, 45, 0.03) 60%, rgba(15, 27, 45, 0.01) 100%);
+  --diamond-cool-border: rgba(62, 90, 133, 0.08);
+  --diamond-cool-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.20);
 
   --pattern-fill: var(--diamond-warm-fill);
-  --pattern-border: rgba(185, 133, 74, 0.35);
-  --pattern-glow: rgba(227, 176, 91, 0.18);
+  --pattern-border: rgba(185, 133, 74, 0.10);
+  --pattern-glow: rgba(227, 176, 91, 0.04);
 }
 
 .dark {
-  /* Diamond Zone - Hero-aligned Palette (Dark Theme) */
+  /* Diamond Zone - Hero-aligned Palette (Dark Theme - Subtle 10% Visibility) */
   --zone-bg:
-    radial-gradient(60% 50% at 85% 20%, rgba(227, 176, 91, 0.12), transparent 70%),
-    radial-gradient(55% 45% at 10% 80%, rgba(62, 90, 133, 0.16), transparent 70%),
-    linear-gradient(180deg, #0B1220 0%, #0E1626 50%, #101A2D 100%);
+    radial-gradient(60% 50% at 85% 20%, rgba(227, 176, 91, 0.03), transparent 70%),
+    radial-gradient(55% 45% at 10% 80%, rgba(62, 90, 133, 0.03), transparent 70%),
+    linear-gradient(180deg, #05080e 0%, #070d17 50%, #05080e 100%);
 
-  --diamond-warm-fill: linear-gradient(135deg, rgba(227, 176, 91, 0.20) 0%, rgba(185, 133, 74, 0.10) 55%, rgba(227, 176, 91, 0.04) 100%);
-  --diamond-warm-border: rgba(227, 176, 91, 0.30);
-  --diamond-warm-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.15), 0 30px 80px rgba(227, 176, 91, 0.12);
+  --diamond-warm-fill: linear-gradient(135deg, rgba(227, 176, 91, 0.06) 0%, rgba(185, 133, 74, 0.025) 55%, rgba(227, 176, 91, 0.01) 100%);
+  --diamond-warm-border: rgba(227, 176, 91, 0.08);
+  --diamond-warm-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.08), 0 15px 40px rgba(227, 176, 91, 0.03);
 
-  --diamond-cool-fill: linear-gradient(135deg, rgba(120, 150, 200, 0.16) 0%, rgba(62, 90, 133, 0.08) 60%, rgba(15, 27, 45, 0.03) 100%);
-  --diamond-cool-border: rgba(150, 175, 215, 0.22);
-  --diamond-cool-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.10);
+  --diamond-cool-fill: linear-gradient(135deg, rgba(120, 150, 200, 0.05) 0%, rgba(62, 90, 133, 0.02) 60%, rgba(15, 27, 45, 0.01) 100%);
+  --diamond-cool-border: rgba(150, 175, 215, 0.07);
+  --diamond-cool-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.06);
 
   --pattern-fill: var(--diamond-warm-fill);
-  --pattern-border: rgba(227, 176, 91, 0.25);
-  --pattern-glow: rgba(227, 176, 91, 0.10);
+  --pattern-border: rgba(227, 176, 91, 0.08);
+  --pattern-glow: rgba(227, 176, 91, 0.025);
 }
 
 @layer base {
@@ -224,7 +224,7 @@
   height: 640px;
   left: -12%;
   top: 4%;
-  opacity: 0.95;
+  opacity: 0.75;
   animation-duration: 18s;
   animation-delay: -3s;
 }
@@ -234,7 +234,7 @@
   height: 420px;
   left: 18%;
   top: 22%;
-  opacity: 0.90;
+  opacity: 0.70;
   animation-duration: 14s;
   animation-delay: -7s;
 }
@@ -244,7 +244,7 @@
   height: 520px;
   left: 42%;
   top: 8%;
-  opacity: 0.85;
+  opacity: 0.65;
   animation-duration: 21s;
   animation-delay: -11s;
 }
@@ -254,7 +254,7 @@
   height: 700px;
   right: -10%;
   top: 30%;
-  opacity: 0.92;
+  opacity: 0.72;
   animation-duration: 16s;
   animation-delay: -4s;
 }
@@ -264,7 +264,7 @@
   height: 360px;
   left: 30%;
   top: 52%;
-  opacity: 0.90;
+  opacity: 0.70;
   animation-duration: 13s;
   animation-delay: -9s;
 }
@@ -274,7 +274,7 @@
   height: 480px;
   right: 18%;
   top: 58%;
-  opacity: 0.85;
+  opacity: 0.65;
   animation-duration: 19s;
   animation-delay: -2s;
 }
@@ -284,7 +284,7 @@
   height: 300px;
   left: 6%;
   top: 70%;
-  opacity: 0.82;
+  opacity: 0.60;
   animation-duration: 15s;
   animation-delay: -6s;
 }
@@ -300,6 +300,7 @@
   border: 1px solid var(--diamond-warm-border);
   background: var(--diamond-warm-fill);
   box-shadow: var(--diamond-warm-shadow);
+  opacity: 0.75;
   transform: rotate(45deg) scaleY(0.62);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
@@ -316,7 +317,7 @@
   border: 1px solid var(--diamond-cool-border);
   background: var(--diamond-cool-fill);
   box-shadow: var(--diamond-cool-shadow);
-  opacity: 0.85;
+  opacity: 0.65;
   transform: rotate(45deg) scaleY(0.62);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
@@ -329,7 +330,7 @@
   height: 580px;
   right: -8%;
   top: 4%;
-  opacity: 0.85;
+  opacity: 0.70;
   background: var(--diamond-warm-fill);
   border: 1px solid var(--diamond-warm-border);
   box-shadow: var(--diamond-warm-shadow);
@@ -342,7 +343,7 @@
   height: 440px;
   left: 28%;
   top: 32%;
-  opacity: 0.75;
+  opacity: 0.60;
   background: var(--diamond-cool-fill);
   border: 1px solid var(--diamond-cool-border);
   box-shadow: var(--diamond-cool-shadow);
@@ -355,7 +356,7 @@
   height: 520px;
   left: -10%;
   top: 42%;
-  opacity: 0.82;
+  opacity: 0.65;
   background: var(--diamond-warm-fill);
   border: 1px solid var(--diamond-warm-border);
   box-shadow: var(--diamond-warm-shadow);
@@ -368,7 +369,7 @@
   height: 360px;
   right: 14%;
   top: 62%;
-  opacity: 0.70;
+  opacity: 0.55;
   background: var(--diamond-cool-fill);
   border: 1px solid var(--diamond-cool-border);
   box-shadow: var(--diamond-cool-shadow);
@@ -381,7 +382,7 @@
   height: 320px;
   left: 8%;
   top: -4%;
-  opacity: 0.65;
+  opacity: 0.50;
   background: var(--diamond-warm-fill);
   border: 1px solid var(--diamond-warm-border);
   box-shadow: var(--diamond-warm-shadow);
@@ -408,7 +409,7 @@
   .diamond.diamond-faq-4 { width: 252px; height: 252px; }
 }
 
-/* Mobile: keep only primary diamonds, scale to ~50%, lower opacity */
+/* Mobile: keep only primary diamonds, scale to ~50, lower opacity */
 @media (max-width: 640px) {
   .diamond.d2,
   .diamond.d3,
@@ -419,12 +420,12 @@
   .diamond.diamond-faq-5 {
     display: none;
   }
-  .diamond.d1 { width: 320px; height: 320px; opacity: 0.65 !important; }
-  .diamond.d4 { width: 350px; height: 350px; opacity: 0.65 !important; }
-  .diamond.d5 { width: 180px; height: 180px; opacity: 0.65 !important; }
+  .diamond.d1 { width: 320px; height: 320px; opacity: 0.50 !important; }
+  .diamond.d4 { width: 350px; height: 350px; opacity: 0.50 !important; }
+  .diamond.d5 { width: 180px; height: 180px; opacity: 0.50 !important; }
 
-  .diamond.diamond-faq-1 { width: 290px; height: 290px; opacity: 0.50 !important; }
-  .diamond.diamond-faq-3 { width: 260px; height: 260px; opacity: 0.50 !important; }
+  .diamond.diamond-faq-1 { width: 290px; height: 290px; opacity: 0.40 !important; }
+  .diamond.diamond-faq-3 { width: 260px; height: 260px; opacity: 0.40 !important; }
 }
 
 /* Reduced Motion */

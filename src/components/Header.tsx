@@ -11,37 +11,11 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { logo, navLinks, cta } = siteContent.header;
 
   const isHome = location.pathname === '/';
-
-  // Listen to scroll to transform navbar into a floating island (throttled with rAF, only updates when boolean changes)
-  useEffect(() => {
-    let ticking = false;
-    let lastScrolled = typeof window !== 'undefined' && window.scrollY > 40;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const current = window.scrollY > 40;
-          if (current !== lastScrolled) {
-            setIsScrolled(current);
-            lastScrolled = current;
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Close mobile menu on route changes
   useEffect(() => {
@@ -71,11 +45,6 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
       setShouldAnimateLogo(false);
     }
   }, [location.pathname]);
-
-  // On any page, when in the first section (window.scrollY <= 40), the navbar is normal (full-width top header).
-  // When scrolling down (window.scrollY > 40), it transforms into a floating island.
-  // Scrolling back up returns it to normal.
-  const isFloating = isScrolled;
 
   // Hero background follows standard light/dark theme classes across all pages
   const isDarkHero = false;
@@ -107,30 +76,18 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
 
   return (
     <header
-      className={
-        isFloating
-          ? "fixed top-3 sm:top-4 inset-x-0 z-50 flex flex-col items-center px-4 sm:px-6 pointer-events-none transition-all duration-300 ease-out"
-          : isDarkHero
-          ? "absolute top-0 left-0 right-0 z-40 w-full select-none bg-gradient-to-b from-[#05080e]/90 via-[#05080e]/50 to-transparent backdrop-blur-[2px] transition-all duration-300 ease-out"
-          : "absolute top-0 left-0 right-0 z-40 w-full select-none bg-gradient-to-b from-white/20 to-transparent dark:from-[#05080e]/30 dark:to-transparent transition-all duration-300 ease-out"
-      }
+      className="absolute top-0 left-0 right-0 z-40 w-full select-none bg-gradient-to-b from-white/20 to-transparent dark:from-[#05080e]/30 dark:to-transparent transition-all duration-300 ease-out"
       aria-label="Site Header"
     >
-      {/* Floating Island or Top Hero Container */}
-      <div
-        className={
-          isFloating
-            ? "pointer-events-auto w-full max-w-[1240px] rounded-full backdrop-blur-xl bg-white/80 dark:bg-[#0c1626]/85 border border-slate-200/80 dark:border-white/15 shadow-[0_12px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.5)] px-5 sm:px-8 py-2 sm:py-2.5 flex items-center justify-between transition-all duration-300"
-            : "max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 pt-5 sm:pt-6 pb-2 flex items-center justify-between"
-        }
-      >
+      {/* Standard Full-width Header Container */}
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 xl:px-16 pt-5 sm:pt-6 pb-2 flex items-center justify-between">
         {/* Left: Brand Logo (AXIA / KAIROS) with animated StrokeText */}
         <Link 
           to="/" 
           className="flex flex-col group select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-axia-slate rounded-sm shrink-0"
           aria-label="AXIA KAIROS Home"
         >
-          <div className={`flex flex-col transition-transform duration-200 origin-left ${isFloating ? 'scale-[0.92]' : 'scale-100'}`}>
+          <div className="flex flex-col transition-transform duration-200 origin-left scale-100">
             <div className="flex items-start">
               <div className={isDarkHero ? "text-white transition-colors" : "text-[#0b192c] dark:text-white transition-colors"}>
                 <StrokeText
@@ -190,9 +147,7 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
         {/* Center: Desktop Navigation Links */}
         <nav 
           aria-label="Main Navigation" 
-          className={`hidden lg:flex items-center pl-6 xl:pl-12 ${
-            isFloating ? 'space-x-5 xl:space-x-8' : 'space-x-7 xl:space-x-10'
-          }`}
+          className="hidden lg:flex items-center pl-6 xl:pl-12 space-x-7 xl:space-x-10"
         >
           {navLinks.map((link) => {
             const isInternal = link.href.startsWith('/') && !link.href.startsWith('/#');
@@ -246,9 +201,7 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
           <div 
             className={`h-5 w-[1px] transition-colors ${
               isDarkHero ? 'bg-white/20' : 'bg-slate-300/80 dark:bg-white/20'
-            } ${
-              isFloating ? 'mr-4 xl:mr-5' : 'mr-5 xl:mr-6'
-            }`} 
+            } mr-5 xl:mr-6`} 
             aria-hidden="true" 
           />
 
@@ -256,12 +209,10 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
           <button
             type="button"
             onClick={handleCta}
-            className={`group relative inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 shadow-sm shrink-0 whitespace-nowrap ${
+            className={`group relative inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 shadow-sm shrink-0 whitespace-nowrap px-5 py-2 text-[14px] ${
               isDarkHero
                 ? 'border border-white/40 text-white bg-transparent hover:bg-white hover:text-[#0b192c] hover:border-white focus-visible:ring-white'
                 : 'border border-slate-200 dark:border-white/30 text-[#0b192c] dark:text-white bg-white dark:bg-white/10 hover:bg-slate-50 dark:hover:bg-white dark:hover:text-[#0b192c] hover:border-slate-300 dark:hover:border-white focus-visible:ring-slate-400 dark:focus-visible:ring-white'
-            } ${
-              isFloating ? 'px-4 py-1.5 text-[13px]' : 'px-5 py-2 text-[14px]'
             }`}
             aria-label="Talk to Us"
           >
@@ -294,15 +245,9 @@ export const Header: React.FC<HeaderProps> = ({ onCtaClick }) => {
         </div>
       </div>
 
-      {/* Mobile Drawer (Responsive for Floating Island or Top Hero) */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div
-          className={
-            isFloating
-              ? "lg:hidden pointer-events-auto mt-2 w-full max-w-[1240px] rounded-2xl backdrop-blur-2xl bg-white/95 dark:bg-[#0c1626]/95 border border-slate-200/80 dark:border-white/15 shadow-2xl px-6 py-6 flex flex-col space-y-4 animate-in fade-in slide-in-from-top-2 duration-200"
-              : "lg:hidden fixed inset-x-0 top-[68px] sm:top-[74px] bg-white/95 dark:bg-[#0c1626]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 shadow-xl px-6 py-6 z-50 flex flex-col space-y-4 animate-in slide-in-from-top duration-200"
-          }
-        >
+        <div className="lg:hidden fixed inset-x-0 top-[68px] sm:top-[74px] bg-white/95 dark:bg-[#0c1626]/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/10 shadow-xl px-6 py-6 z-50 flex flex-col space-y-4 animate-in slide-in-from-top duration-200">
           <nav className="flex flex-col space-y-3">
             {navLinks.map((link) => {
               const isInternal = link.href.startsWith('/') && !link.href.startsWith('/#');
