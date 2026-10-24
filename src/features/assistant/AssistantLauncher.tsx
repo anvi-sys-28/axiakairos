@@ -89,7 +89,7 @@ export const AssistantLauncher: React.FC = () => {
       {!isOpen && (
         <aside
           aria-label="AI Assistant Launcher"
-          className="fixed right-3 sm:right-5 bottom-28 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 z-50 select-none animate-in fade-in duration-300"
+          className="fixed right-3 sm:right-5 bottom-24 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 z-50 select-none animate-in fade-in duration-300"
         >
           <button
             ref={launcherButtonRef}
@@ -99,21 +99,23 @@ export const AssistantLauncher: React.FC = () => {
             aria-haspopup="dialog"
             aria-label="Open AXIA AI Assistant"
             title="Chat with AXIA Assistant"
-            className="group relative w-12 sm:w-14 h-12 sm:h-14 rounded-full overflow-visible p-0 bg-transparent border-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c2a675] active:scale-95 transition-transform duration-200"
+            className="group relative w-16 sm:w-20 h-20 sm:h-24 p-0 bg-transparent border-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c2a675] active:scale-95 transition-all duration-300"
           >
             {/* Pulsing Green Online Indicator Ring */}
-            <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3 z-20">
+            <span className="absolute top-1 right-2 flex h-3 w-3 z-20">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 ring-2 ring-white dark:ring-[#0b192c]" />
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 ring-2 ring-white shadow-sm" />
             </span>
 
-            {/* Chatbot Image Avatar Icon - Clean floating circular icon without rectangular box */}
-            <div className="w-full h-full rounded-full overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.35)] ring-2 ring-white/60 dark:ring-white/30 group-hover:ring-[#c2a675] group-hover:scale-105 transition-all duration-300 bg-[#0c1524] flex items-center justify-center">
-              <img src="/c.webp" alt="AXIA AI Assistant" className="w-full h-full object-cover object-top" />
-            </div>
+            {/* Pure Robot Character Image - No circle, no black box */}
+            <img
+              src="/c.webp"
+              alt="AXIA AI Assistant"
+              className="w-full h-full object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.35)] group-hover:drop-shadow-[0_12px_24px_rgba(194,166,117,0.45)] group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300 pointer-events-none select-none"
+            />
 
             {/* Flyout Tooltip on Hover */}
-            <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 pointer-events-none transition-all duration-200 px-3 py-1.5 rounded-xl bg-[#0b192c]/95 text-white text-[12px] font-medium whitespace-nowrap shadow-xl border border-white/15 flex items-center gap-1.5 backdrop-blur-md">
+            <div className="absolute right-full mr-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 pointer-events-none transition-all duration-200 px-3 py-1.5 rounded-xl bg-[#0b192c]/95 text-white text-[12px] font-medium whitespace-nowrap shadow-xl border border-white/15 flex items-center gap-1.5 backdrop-blur-md">
               <span className="font-semibold text-[#c2a675]">Ask AXIA</span>
               <span className="text-slate-300">· Assistant</span>
             </div>
