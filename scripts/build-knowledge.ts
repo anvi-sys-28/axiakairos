@@ -24,7 +24,8 @@ export interface Chunk {
     | 'approach'
     | 'product'
     | 'contact'
-    | 'legal';
+    | 'legal'
+    | 'faq';
   title: string;
   section: string;
   url: string;
@@ -380,6 +381,30 @@ async function main() {
     slug: 'terms-and-conditions',
     text: `<legal>: Terms and Conditions > Website Terms of Use & IP Notice\n${legalData.termsAndConditions.summary}`,
   });
+
+  // 11. CURATED FAQ CHUNKS
+  const faqFilePath = path.resolve(process.cwd(), 'server', 'knowledge', 'faq.json');
+  if (fs.existsSync(faqFilePath)) {
+    try {
+      const rawFaqs = JSON.parse(fs.readFileSync(faqFilePath, 'utf8'));
+      if (Array.isArray(rawFaqs)) {
+        for (const item of rawFaqs) {
+          chunks.push({
+            id: item.id || `faq-${chunks.length}`,
+            type: 'faq',
+            title: item.question,
+            section: item.title || 'Curated Corporate FAQ',
+            url: item.url || '/about',
+            slug: item.category || 'faq',
+            text: `<faq>: Question: ${item.question}\nApproved Answer: ${item.answer}\nContext: Axia Kairos verified executive knowledge.`,
+          });
+        }
+        console.log(`📑 Loaded ${rawFaqs.length} curated FAQ chunks.`);
+      }
+    } catch (faqErr) {
+      console.warn('Warning reading FAQ file:', faqErr);
+    }
+  }
 
   // Build Structured Registry
   const structured = {

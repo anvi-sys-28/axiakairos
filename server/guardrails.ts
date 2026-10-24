@@ -72,7 +72,6 @@ export function verifyNumericGroundedness(
   response: string,
   retrievedContextText: string
 ): { passed: boolean; ungroundedMetrics: string[] } {
-  // Extract percentages, stats, and numbers like "99.99%", "38%", "4x", "128", "$10M"
   const metricRegex = /(?:\$\d+(?:\.\d+)?[MBKmbk]?|\b\d+(?:\.\d+)?%|\b\d+x\b|\b\d{2,}(?:,\d{3})*(?:\.\d+)?\b)/g;
 
   const matches = response.match(metricRegex) || [];
@@ -99,11 +98,90 @@ export function verifyNumericGroundedness(
 }
 
 /**
+ * Logs content gaps to server/data/gaps.json for editorial review.
+ */
+export function logContentGap(
+  question: string,
+  reason: string = 'Information not found in knowledge base',
+  contextSnippet?: string
+): void {
+  try {
+    const dataDir = path.resolve(process.cwd(), 'server', 'data');
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+
+    const gapsPath = path.resolve(dataDir, 'gaps.json');
+    let gaps: any[] = [];
+    if (fs.existsSync(gapsPath)) {
+      try {
+        gaps = JSON.parse(fs.readFileSync(gapsPath, 'utf8'));
+      } catch {}
+    }
+
+    gaps.push({
+      id: `gap-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      timestamp: new Date().toISOString(),
+      question,
+      reason,
+      contextSnippet: contextSnippet ? contextSnippet.slice(0, 300) : undefined,
+    });
+
+    // Keep last 1000 entries
+    if (gaps.length > 1000) gaps = gaps.slice(-1000);
+
+    fs.writeFileSync(gapsPath, JSON.stringify(gaps, null, 2), 'utf8');
+  } catch (err) {
+    console.error('Failed to log content gap:', err);
+  }
+}
+
+/**
+ * Logs visitor feedback (thumbs up / thumbs down) to server/data/feedback.json.
+ */
+export function logVisitorFeedback(feedback: {
+  rating: 'up' | 'down';
+  question: string;
+  answerSnippet?: string;
+  usedChunks?: string[];
+}): void {
+  try {
+    const dataDir = path.resolve(process.cwd(), 'server', 'data');
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+
+    const feedbackPath = path.resolve(dataDir, 'feedback.json');
+    let records: any[] = [];
+    if (fs.existsSync(feedbackPath)) {
+      try {
+        records = JSON.parse(fs.readFileSync(feedbackPath, 'utf8'));
+      } catch {}
+    }
+
+    records.push({
+      id: `fb-${Date.now()}`,
+      timestamp: new Date().toISOString(),
+      rating: feedback.rating,
+      question: feedback.question,
+      answerSnippet: feedback.answerSnippet ? feedback.answerSnippet.slice(0, 300) : undefined,
+      usedChunks: feedback.usedChunks || [],
+    });
+
+    if (records.length > 2000) records = records.slice(-2000);
+
+    fs.writeFileSync(feedbackPath, JSON.stringify(records, null, 2), 'utf8');
+  } catch (err) {
+    console.error('Failed to log feedback:', err);
+  }
+}
+
+/**
  * Appends an entry to server/logs/unanswered.jsonl for continuous KB improvement.
  */
 export function logUnansweredQuestion(
   question: string,
-  retrievedChunks: Chunk[]
+  retrievedChunks: Chunk[] = []
 ): void {
   try {
     const logsDir = path.resolve(process.cwd(), 'server', 'logs');
@@ -119,6 +197,9 @@ export function logUnansweredQuestion(
     };
 
     fs.appendFileSync(logPath, JSON.stringify(entry) + '\n', 'utf8');
+
+    // Also record in gaps.json
+    logContentGap(question, 'Knowledge base lacked exact answer', retrievedChunks[0]?.text);
   } catch (err) {
     console.error('Failed to log unanswered question:', err);
   }

@@ -25,19 +25,37 @@ interface HandoffFormProps {
 
 export const HandoffForm: React.FC<HandoffFormProps> = ({ data, onSubmitted }) => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
+    fullName: data?.prefill?.name || '',
+    email: data?.prefill?.email || '',
     countryCode: '+1',
     phone: '',
-    company: '',
-    message: data?.reason ? `I'd like to speak with a principal advisor regarding: ${data.reason}` : '',
+    company: data?.prefill?.company || '',
+    message:
+      data?.prefill?.message ||
+      (data?.reason ? `I'd like to speak with a principal advisor regarding: ${data.reason}` : ''),
     consent: false,
   });
 
+  const [dismissed, setDismissed] = useState(false);
   const [files, setFiles] = useState<File[]>(data?.preselectedFiles || []);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [feedbackMsg, setFeedbackMsg] = useState('');
+
+  if (dismissed) {
+    return (
+      <div className="my-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-center justify-between">
+        <span>Advisor consultation form minimized.</span>
+        <button
+          type="button"
+          onClick={() => setDismissed(false)}
+          className="text-[#c2a675] hover:text-[#a88a55] font-medium transition-colors"
+        >
+          Reopen form
+        </button>
+      </div>
+    );
+  }
 
   const removeFile = (index: number) => {
     setFiles((prev) => prev.filter((_, i) => i !== index));
@@ -114,13 +132,23 @@ export const HandoffForm: React.FC<HandoffFormProps> = ({ data, onSubmitted }) =
       noValidate
       className="my-3 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm space-y-3.5 text-left"
     >
-      <div className="border-b border-slate-100 pb-2.5">
-        <span className="font-mono text-[10px] uppercase tracking-wider text-cyan-600 font-semibold">
-          DIRECT ADVISORY HANDOFF
-        </span>
-        <h4 className="font-serif text-sm sm:text-base font-bold text-slate-900">
-          Connect with an Axia Kairos Principal Advisor
-        </h4>
+      <div className="border-b border-slate-100 pb-2.5 flex items-start justify-between gap-2">
+        <div>
+          <span className="font-mono text-[10px] uppercase tracking-wider text-cyan-600 font-semibold">
+            DIRECT ADVISORY HANDOFF
+          </span>
+          <h4 className="font-serif text-sm sm:text-base font-bold text-slate-900">
+            Connect with an Axia Kairos Principal Advisor
+          </h4>
+        </div>
+        <button
+          type="button"
+          onClick={() => setDismissed(true)}
+          className="text-xs text-slate-400 hover:text-slate-700 font-medium px-2 py-1 rounded-md hover:bg-slate-100 transition-colors shrink-0"
+          title="Back to chat"
+        >
+          ← Back to chat
+        </button>
       </div>
 
       {Object.keys(errors).length > 0 && (

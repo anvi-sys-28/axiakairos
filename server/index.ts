@@ -5,7 +5,7 @@ import path from 'path';
 import jwt from 'jsonwebtoken';
 import { handleChat, ChatMessage } from './chat-engine';
 import { getRetriever } from './retrieval';
-import { logHandoffSubmission } from './guardrails';
+import { logHandoffSubmission, logVisitorFeedback } from './guardrails';
 import {
   initDb,
   getDbStatus,
@@ -119,7 +119,7 @@ app.get('/api/health', (req: Request, res: Response) => {
       status: 'ok',
       timestamp: new Date().toISOString(),
       kbChunks: chunksCount,
-      aiModel: process.env.CHAT_MODEL || 'claude-3-5-sonnet-latest',
+      aiModel: process.env.AI_MODEL || process.env.CHAT_MODEL || 'claude-haiku-5-5',
       hasApiKey: !!process.env.ANTHROPIC_API_KEY,
       database: dbStatus,
     });
@@ -207,6 +207,27 @@ app.post('/api/handoff', (req: Request, res: Response) => {
   return res.json({
     success: true,
     message: 'Thank you. Your request and conversation context have been submitted to an Axia Kairos principal consultant. We will respond within 24 hours.',
+  });
+});
+
+// 3b. POST /api/feedback - Visitor thumbs up / down feedback
+app.post('/api/feedback', (req: Request, res: Response) => {
+  const { rating, question, answerSnippet, usedChunks } = req.body;
+
+  if (!rating || (rating !== 'up' && rating !== 'down')) {
+    return res.status(400).json({ error: 'Rating must be either "up" or "down".' });
+  }
+
+  logVisitorFeedback({
+    rating,
+    question: String(question || '').slice(0, 500),
+    answerSnippet: String(answerSnippet || '').slice(0, 500),
+    usedChunks: Array.isArray(usedChunks) ? usedChunks : [],
+  });
+
+  return res.json({
+    success: true,
+    message: 'Feedback recorded successfully. Thank you for helping us improve our responses.',
   });
 });
 

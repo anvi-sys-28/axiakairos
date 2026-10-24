@@ -18,6 +18,12 @@ export interface SourceItem {
 export interface FormPartData {
   reason?: string;
   preselectedFiles?: File[];
+  prefill?: {
+    name?: string;
+    email?: string;
+    company?: string;
+    message?: string;
+  };
 }
 
 export type MessagePart =
@@ -32,6 +38,7 @@ export interface Message {
   role: Role;
   createdAt: number;
   parts: MessagePart[];
+  feedback?: 'up' | 'down';
 }
 
 export interface AttachedFile {

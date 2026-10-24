@@ -11,6 +11,7 @@
     "test": "npm run test:retrieval",
     "kb:build": "tsx scripts/build-knowledge.ts",
     "server": "tsx server/index.ts",
+    "eval": "tsx scripts/run-eval.ts",
     "chatbot:eval": "tsx scripts/run-eval.ts",
     "test:retrieval": "tsx tests/retrieval.test.ts",
     "test:admin": "tsx tests/admin-api.test.ts"
@@ -37,7 +38,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.1",
     "tailwind-merge": "^2.6.0",
-    "topojson-client": "^3.1.0"
+    "topojson-client": "^3.1.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

@@ -1,10 +1,11 @@
-import React from 'react';
-import { User } from 'lucide-react';
+import React, { useState } from 'react';
+import { User, ThumbsUp, ThumbsDown } from 'lucide-react';
 import type { Message } from './types';
 import { ServiceCardRow } from './ServiceCardRow';
 import { QuickReplies } from './QuickReplies';
 import { SourcesRow } from './SourcesRow';
 import { HandoffForm } from './HandoffForm';
+import { sendFeedback } from './api';
 
 interface MessageBubbleProps {
   message: Message;
@@ -31,6 +32,25 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
 }) => {
   const isUser = message.role === 'user';
   const timeFormatted = formatMessageTime(message.createdAt);
+  const [feedback, setFeedback] = useState<'up' | 'down' | null>(message.feedback || null);
+
+  const textPart = message.parts.find((p) => p.type === 'text') as
+    | { type: 'text'; content: string }
+    | undefined;
+  const sourcesPart = message.parts.find((p) => p.type === 'sources') as
+    | { type: 'sources'; sources: any[] }
+    | undefined;
+
+  const handleFeedback = (rating: 'up' | 'down') => {
+    if (feedback === rating) return;
+    setFeedback(rating);
+    sendFeedback({
+      rating,
+      question: 'User inquiry',
+      answerSnippet: textPart?.content?.slice(0, 300) || '',
+      usedChunks: sourcesPart?.sources?.map((s: any) => s.title || s.url) || [],
+    });
+  };
 
   if (isUser) {
     const textPart = message.parts.find((p) => p.type === 'text') as { type: 'text'; content: string } | undefined;
@@ -128,9 +148,37 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
             return null;
           })}
 
-          <span className="text-[10px] font-mono text-slate-400 ml-1 select-none">
-            {timeFormatted}
-          </span>
+          <div className="flex items-center gap-2.5 mt-1 ml-1 select-none">
+            <span className="text-[10px] font-mono text-slate-400">
+              {timeFormatted}
+            </span>
+            {!isStreaming && textPart?.content && (
+              <div className="flex items-center gap-1 text-slate-400">
+                <button
+                  type="button"
+                  onClick={() => handleFeedback('up')}
+                  className={`p-1 rounded hover:bg-slate-100 transition-colors ${
+                    feedback === 'up' ? 'text-emerald-600 bg-emerald-50' : 'hover:text-slate-600'
+                  }`}
+                  title="Helpful answer"
+                  aria-label="Thumbs up"
+                >
+                  <ThumbsUp className="w-3 h-3" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleFeedback('down')}
+                  className={`p-1 rounded hover:bg-slate-100 transition-colors ${
+                    feedback === 'down' ? 'text-rose-600 bg-rose-50' : 'hover:text-slate-600'
+                  }`}
+                  title="Needs improvement"
+                  aria-label="Thumbs down"
+                >
+                  <ThumbsDown className="w-3 h-3" />
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

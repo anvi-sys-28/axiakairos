@@ -164,3 +164,20 @@ export async function submitHandoff(payload: HandoffPayload): Promise<{ success:
 
   return await res.json();
 }
+
+export async function sendFeedback(payload: {
+  rating: 'up' | 'down';
+  question: string;
+  answerSnippet?: string;
+  usedChunks?: string[];
+}): Promise<void> {
+  try {
+    await fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.warn('Feedback send failed:', err);
+  }
+}

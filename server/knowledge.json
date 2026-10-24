@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-23T12:05:10.308Z",
-  "totalChunks": 108,
+  "generatedAt": "2026-10-24T12:30:45.198Z",
+  "totalChunks": 123,
   "chunks": [
     {
       "id": "service-ai-blockchain-and-io-t-integration-overview",
@@ -973,6 +973,141 @@
       "url": "/terms-and-conditions",
       "slug": "terms-and-conditions",
       "text": "<legal>: Terms and Conditions > Website Terms of Use & IP Notice\nThe Axia Kairos website and its proprietary materials, logos, content, and trademarks are owned by Axia Kairos Consulting Inc. Use of this website is governed by our standard terms of service. Content is provided for informational and business evaluation purposes. Unauthorized reproduction or reverse engineering is prohibited."
+    },
+    {
+      "id": "faq-who-is-axia",
+      "type": "faq",
+      "title": "Who is Axia Kairos and what does the company do?",
+      "section": "About Axia Kairos",
+      "url": "/about",
+      "slug": "about",
+      "text": "<faq>: Question: Who is Axia Kairos and what does the company do?\nApproved Answer: Axia Kairos is a premier global technology and management consulting firm. We specialize in digital transformation, SAP S/4HANA advisory and implementation, cloud platform modernization across AWS, Azure, and GCP, enterprise data engineering and analytics, and business process automation. We partner with Global 2000 enterprises to solve complex architectural, operational, and strategic challenges.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-services-overview",
+      "type": "faq",
+      "title": "What services does Axia Kairos offer?",
+      "section": "Enterprise Services Overview",
+      "url": "/services",
+      "slug": "services",
+      "text": "<faq>: Question: What services does Axia Kairos offer?\nApproved Answer: Axia Kairos provides 12 specialized enterprise domains: SAP Implementation, Advisory & Support, Cloud Platform Modernization, Data Engineering & Analytics, Business Process Automation, AI, Blockchain & IoT Integration, Cyber Security Services, Digital Transformation, Application Managed IT Services, E-Commerce Solutions, Management Consulting, Mobility & App Development, and Web Development.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-methodology-approach",
+      "type": "faq",
+      "title": "How do you work with clients? What is your delivery methodology?",
+      "section": "Our Delivery Methodology",
+      "url": "/our-approach",
+      "slug": "about",
+      "text": "<faq>: Question: How do you work with clients? What is your delivery methodology?\nApproved Answer: We execute our engagements through a disciplined 5-step delivery methodology: 1. Discover & Diagnose (current-state assessment and architectural audit), 2. Architecture & Blueprint (target operating models and roadmap design), 3. Agile Sprint Delivery (iterative sprint implementation with automated CI/CD), 4. Validation & Testing (performance hardening and security signoff), and 5. Value Realization & Managed Support (continuous optimization and SLA-backed support).\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-delivery-models",
+      "type": "faq",
+      "title": "What delivery models do you support?",
+      "section": "Engagement & Delivery Models",
+      "url": "/our-approach",
+      "slug": "about",
+      "text": "<faq>: Question: What delivery models do you support?\nApproved Answer: Axia Kairos offers three flexible engagement models tailored to client operating requirements: Onsite Advisory (embedded principal architects for strategic governance), Dedicated Offshore Delivery Centers (cost-effective scaled engineering in high-talent hubs), and Hybrid Blended Teams (seamless 24/7 follow-the-sun delivery combining local client partners with global development pods).\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-sap-s4hana",
+      "type": "faq",
+      "title": "What are your SAP S/4HANA capabilities?",
+      "section": "SAP Implementation, Advisory & Support",
+      "url": "/services/sap-implementation-advisory-and-support",
+      "slug": "services",
+      "text": "<faq>: Question: What are your SAP S/4HANA capabilities?\nApproved Answer: Axia Kairos delivers comprehensive SAP transformations, including brownfield and greenfield SAP ECC to S/4HANA migrations, SAP Business Technology Platform (BTP) extensions, SAP Datasphere analytics, automated finance and supply chain workflows, and round-the-clock enterprise support. Our certified SAP practitioners minimize business disruption with automated pre-migration data cleansing and validation.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-cloud-platforms",
+      "type": "faq",
+      "title": "What cloud platforms and infrastructure services do you support?",
+      "section": "Cloud Platform Modernization",
+      "url": "/services/cloud-platform-modernization",
+      "slug": "services",
+      "text": "<faq>: Question: What cloud platforms and infrastructure services do you support?\nApproved Answer: We architect and modernize multi-cloud and hybrid environments across Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP). Our capabilities span cloud-native microservices architecture, Kubernetes container orchestration, infrastructure as code (Terraform), FinOps cost optimization, and secure legacy workload migration.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-data-engineering",
+      "type": "faq",
+      "title": "What data engineering and analytics solutions do you provide?",
+      "section": "Data Engineering and Analytics",
+      "url": "/services/data-engineering-and-analytics",
+      "slug": "services",
+      "text": "<faq>: Question: What data engineering and analytics solutions do you provide?\nApproved Answer: Our data practice designs enterprise lakehouse architectures, real-time streaming data pipelines, modern data governance frameworks, and automated executive business intelligence. We work extensively with Snowflake, Databricks, Apache Spark, Kafka, Power BI, and SAP SAC to transform raw enterprise data into trusted decision assets.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-ai-automation",
+      "type": "faq",
+      "title": "How do you help with AI and Business Process Automation?",
+      "section": "Business Process Automation",
+      "url": "/services/business-process-automation",
+      "slug": "services",
+      "text": "<faq>: Question: How do you help with AI and Business Process Automation?\nApproved Answer: We deploy robotic process automation (RPA), intelligent document processing, generative AI workflows, and machine learning models to eliminate manual bottlenecks across invoice processing, supply chain reconciliation, and customer operations. We build resilient integrations connecting ERP backends to modern AI services.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-cyber-security",
+      "type": "faq",
+      "title": "What cyber security services do you deliver?",
+      "section": "Cyber Security Services",
+      "url": "/services/cyber-security-services",
+      "slug": "services",
+      "text": "<faq>: Question: What cyber security services do you deliver?\nApproved Answer: Our cyber security practice delivers zero-trust architecture blueprints, vulnerability management, cloud security posture management (CSPM), identity and access management (IAM), SOC2/ISO 27001 compliance preparedness, and incident response governance to protect mission-critical enterprise systems.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-industries-served",
+      "type": "faq",
+      "title": "Which industries does Axia Kairos specialize in?",
+      "section": "Industries We Serve",
+      "url": "/industries",
+      "slug": "industries",
+      "text": "<faq>: Question: Which industries does Axia Kairos specialize in?\nApproved Answer: Axia Kairos serves 12 enterprise domains: Automotive & Manufacturing, Energy & Utilities, Banking & Financial Services, Healthcare & Life Sciences, Retail & E-Commerce, Telecommunications, Transportation & Logistics, Public Sector & Government, Aerospace & Defense, Consumer Goods, Technology & Media, and Insurance.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-office-locations",
+      "type": "faq",
+      "title": "Where are Axia Kairos offices located?",
+      "section": "Corporate Office Locations",
+      "url": "/contact",
+      "slug": "contact",
+      "text": "<faq>: Question: Where are Axia Kairos offices located?\nApproved Answer: Axia Kairos operates regional corporate hubs across Canada, India, the United States, and the United Arab Emirates (UAE). Due to client security protocols, physical facility visits and in-person consultations are scheduled by appointment through our advisory team.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-contact-info",
+      "type": "faq",
+      "title": "How can I contact Axia Kairos or speak with an advisor?",
+      "section": "Contact Axia Kairos",
+      "url": "/contact",
+      "slug": "contact",
+      "text": "<faq>: Question: How can I contact Axia Kairos or speak with an advisor?\nApproved Answer: You can reach Axia Kairos via email at contact@axiakairos.com for general inquiries, info@axiakairos.com for information, and partnerships@axiakairos.com for alliances. You can also initiate a consultation through our direct advisor handoff form on the website.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-pricing-quotes",
+      "type": "faq",
+      "title": "What does Axia Kairos charge and how does pricing work?",
+      "section": "Engagement Scoping & Pricing",
+      "url": "/contact",
+      "slug": "contact",
+      "text": "<faq>: Question: What does Axia Kairos charge and how does pricing work?\nApproved Answer: Axia Kairos does not post fixed rate cards or public price sheets. Every enterprise engagement is tailored to scope, technical complexity, target architecture, and delivery model. We invite prospective clients to submit their project parameters through our advisor consultation form for a customized proposal.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-careers-hiring",
+      "type": "faq",
+      "title": "How do I apply for jobs or explore careers at Axia Kairos?",
+      "section": "Careers at Axia Kairos",
+      "url": "/careers",
+      "slug": "careers",
+      "text": "<faq>: Question: How do I apply for jobs or explore careers at Axia Kairos?\nApproved Answer: We are continuously hiring senior technologists and consultants across SAP, Cloud Architecture, Data Engineering, and Operations. You can view all current open roles, requirements, and locations directly on our Careers page at /careers and apply through the individual job listings.\nContext: Axia Kairos verified executive knowledge."
+    },
+    {
+      "id": "faq-case-studies",
+      "type": "faq",
+      "title": "Can you share examples of verified client results and case studies?",
+      "section": "Enterprise Case Studies",
+      "url": "/case-studies",
+      "slug": "case_studies",
+      "text": "<faq>: Question: Can you share examples of verified client results and case studies?\nApproved Answer: Our website features documented enterprise case studies across telecommunications (38% cloud infrastructure cost reduction), logistics & transportation (99.99% system availability with SAP BTP automation), pharmaceutical compliance (99.8% regulatory data validation rate), and financial services (zero downtime SAP S/4HANA migration). All case studies are anonymized in accordance with client NDAs.\nContext: Axia Kairos verified executive knowledge."
     }
   ],
   "structured": {
