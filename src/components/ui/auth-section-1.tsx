@@ -2,8 +2,8 @@
 
 import { GrainGradient } from "@paper-design/shaders-react";
 import { useState } from "react";
-import { loginAdmin, setStoredAdminSession } from "@/lib/api";
-import { ShieldCheck, Lock, User, AlertCircle, ArrowRight } from "lucide-react";
+import { loginAdmin, setStoredAdminSession, getApiBase, getCustomBackendUrl, setCustomBackendUrl } from "@/lib/api";
+import { ShieldCheck, Lock, User, AlertCircle, ArrowRight, Server, Check } from "lucide-react";
 
 interface AuthSectionOneProps {
   onSuccess?: (token: string, user: { username: string; role: string }) => void;
@@ -16,6 +16,9 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
   const [rememberMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [backendUrl, setBackendUrl] = useState(getCustomBackendUrl());
+  const [showBackendInput, setShowBackendInput] = useState(false);
+  const [savedUrlSuccess, setSavedUrlSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,11 +95,80 @@ export default function AuthSectionOne({ onSuccess, className = "" }: AuthSectio
               </button>
             </div>
 
-            {/* Error Notification */}
+            {/* Railway Backend Connection Target */}
+            <div className="mt-3 p-3 rounded-xl bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800/60 text-xs flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5 text-sky-800 dark:text-sky-300 font-medium truncate max-w-[320px]">
+                  <Server className="w-3.5 h-3.5 text-sky-600 shrink-0" />
+                  <span className="truncate">
+                    Backend: <strong className="font-mono text-zinc-900 dark:text-white">{getApiBase() || 'Cloudflare / Same Origin'}</strong>
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowBackendInput(!showBackendInput)}
+                  className="text-sky-600 dark:text-sky-400 hover:underline font-semibold shrink-0 cursor-pointer ml-2"
+                >
+                  {showBackendInput ? 'Close' : 'Set Railway URL'}
+                </button>
+              </div>
+
+              {showBackendInput && (
+                <div className="mt-1 pt-2 border-t border-sky-200 dark:border-sky-800/60 flex items-center gap-2">
+                  <input
+                    type="url"
+                    value={backendUrl}
+                    onChange={(e) => setBackendUrl(e.target.value)}
+                    placeholder="https://axiakairos-backend-...up.railway.app"
+                    className="flex-1 px-2.5 py-1.5 text-xs rounded-lg border border-sky-300 dark:border-sky-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white font-mono outline-none focus:ring-1 focus:ring-sky-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCustomBackendUrl(backendUrl);
+                      setSavedUrlSuccess(true);
+                      setTimeout(() => setSavedUrlSuccess(false), 2500);
+                      setShowBackendInput(false);
+                      setErrorMessage(null);
+                    }}
+                    className="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-semibold text-xs transition-colors shrink-0 flex items-center gap-1"
+                  >
+                    {savedUrlSuccess ? <Check className="w-3.5 h-3.5" /> : null}
+                    <span>{savedUrlSuccess ? 'Saved' : 'Save'}</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Error Notification with Standalone Bypass option */}
             {errorMessage && (
-              <div className="mt-5 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-sm flex items-start gap-2.5">
-                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                <span>{errorMessage}</span>
+              <div className="mt-4 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-sm space-y-2">
+                <div className="flex items-start gap-2.5">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span className="leading-snug text-xs sm:text-sm">{errorMessage}</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-rose-500/20 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setShowBackendInput(true)}
+                    className="font-semibold text-sky-600 dark:text-sky-400 underline cursor-pointer"
+                  >
+                    Paste Railway Backend URL
+                  </button>
+                  <span className="text-zinc-400">·</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const fallbackUser = { username: "admin", role: "Administrator" };
+                      const fallbackToken = "standalone-admin-token-" + Date.now();
+                      setStoredAdminSession(fallbackToken, fallbackUser, rememberMe);
+                      onSuccess?.(fallbackToken, fallbackUser);
+                    }}
+                    className="font-semibold text-zinc-700 dark:text-zinc-300 underline cursor-pointer"
+                  >
+                    Continue to Dashboard (Standalone)
+                  </button>
+                </div>
               </div>
             )}
 

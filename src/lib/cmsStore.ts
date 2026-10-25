@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { siteContent as defaultSiteContent } from '@/content/site';
 import { aboutData as defaultAboutData } from '@/data/about';
 import { contactData as defaultContactData } from '@/data/contact';
@@ -71,6 +72,7 @@ export interface CMSData {
   };
   llm: {
     model: string;
+    provider?: 'openai' | 'anthropic';
     temperature: number;
     maxTokens: number;
     searchEnabled: boolean;
@@ -170,7 +172,8 @@ export const getDefaultCMSData = (): CMSData => ({
     ],
   },
   llm: {
-    model: 'claude-3-5-sonnet-20241022',
+    model: 'gpt-4o-mini',
+    provider: 'openai',
     temperature: 0.2,
     maxTokens: 1024,
     searchEnabled: true,
@@ -296,4 +299,44 @@ export function importCMSData(jsonStr: string): boolean {
   } catch {
     return false;
   }
+}
+
+/**
+ * React Hook to subscribe to CMS data changes across the entire app
+ */
+export function useCMS(): CMSData {
+  const [data, setData] = useState<CMSData>(loadCMSData);
+
+  useEffect(() => {
+    const handleUpdate = (e: any) => {
+      if (e.detail) {
+        setData(e.detail);
+      }
+    };
+    window.addEventListener(CMS_UPDATE_EVENT, handleUpdate);
+    return () => window.removeEventListener(CMS_UPDATE_EVENT, handleUpdate);
+  }, []);
+
+  return data;
+}
+
+/**
+ * Sync published CMS data from Railway backend to local browser state
+ */
+export async function syncCMSFromServer(): Promise<CMSData | null> {
+  if (typeof window === 'undefined') return null;
+  try {
+    const apiBase = (import.meta as any).env?.VITE_API_URL || '';
+    const res = await fetch(`${apiBase.replace(/\/$/, '')}/api/content`);
+    if (res.ok) {
+      const json = await res.json();
+      if (json && json.data && json.data.homePage) {
+        saveCMSData(json.data);
+        return json.data;
+      }
+    }
+  } catch (e) {
+    // Graceful offline fallback
+  }
+  return null;
 }

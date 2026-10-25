@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/webp" href="/l.webp" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
+    <link rel="shortcut icon" href="/l.webp" />
+    <link rel="apple-touch-icon" href="/l.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AXIA KAIROS — Strategy that moves you forward.</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="AXIA KAIROS — Strategy that moves you forward." />
+    <meta name="description" content="Axia Kairos Advisory & Technology Group — Strategy that moves you forward. Cloud Platform Modernization, SAP S/4HANA Migrations, AI & Managed Services." />
+
+    <!-- Open Graph / WhatsApp / Facebook Preview Card -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AXIA KAIROS" />
+    <meta property="og:title" content="AXIA KAIROS — Strategy that moves you forward." />
+    <meta property="og:description" content="Axia Kairos Advisory & Technology Group — Strategy that moves you forward. Cloud Platform Modernization, SAP S/4HANA Migrations, AI & Managed Services." />
+    <meta property="og:image" content="/l.webp" />
+    <meta property="og:image:secure_url" content="/l.webp" />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="1254" />
+    <meta property="og:image:height" content="1254" />
+    <meta property="og:image:alt" content="AXIA KAIROS Official Logo" />
+
+    <!-- High-compatibility fallback for WhatsApp clients needing PNG -->
+    <meta property="og:image" content="/l.png" />
+    <meta property="og:image:secure_url" content="/l.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1254" />
+    <meta property="og:image:height" content="1254" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AXIA KAIROS — Strategy that moves you forward." />
+    <meta name="twitter:description" content="Axia Kairos Advisory & Technology Group — Strategy that moves you forward. Cloud Platform Modernization, SAP S/4HANA Migrations, AI & Managed Services." />
+    <meta name="twitter:image" content="/l.webp" />
+    <!-- Self-hosted Inter font with preloading for instantaneous rendering without third-party network blocking -->
+    <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (saved === 'dark' || (!saved && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-white text-axia-navy antialiased selection:bg-axia-slate/20 selection:text-axia-navy font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

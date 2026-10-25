@@ -1,5 +1,13 @@
 import type { Message, HandoffPayload, CardItem, SourceItem } from './types';
 
+function getApiBase(): string {
+  if (typeof window !== 'undefined') {
+    const custom = localStorage.getItem('axia_backend_url');
+    if (custom) return custom;
+  }
+  return (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+}
+
 export interface HealthResponse {
   status: 'ok' | 'offline';
   timestamp?: string;
@@ -9,7 +17,7 @@ export interface HealthResponse {
 
 export async function checkHealth(): Promise<HealthResponse> {
   try {
-    const res = await fetch('/api/health');
+    const res = await fetch(`${getApiBase()}/api/health`);
     if (!res.ok) return { status: 'offline' };
     return await res.json();
   } catch {
@@ -19,7 +27,7 @@ export async function checkHealth(): Promise<HealthResponse> {
 
 export async function fetchSuggestedChips(): Promise<string[]> {
   try {
-    const res = await fetch('/api/chat', {
+    const res = await fetch(`${getApiBase()}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ intent: 'suggest' }),
@@ -68,7 +76,7 @@ export async function streamChat(
     })
     .slice(-10);
 
-  const res = await fetch('/api/chat', {
+  const res = await fetch(`${getApiBase()}/api/chat`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -151,7 +159,7 @@ export async function streamChat(
 }
 
 export async function submitHandoff(payload: HandoffPayload): Promise<{ success: boolean; message: string }> {
-  const res = await fetch('/api/handoff', {
+  const res = await fetch(`${getApiBase()}/api/handoff`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -172,7 +180,7 @@ export async function sendFeedback(payload: {
   usedChunks?: string[];
 }): Promise<void> {
   try {
-    await fetch('/api/feedback', {
+    await fetch(`${getApiBase()}/api/feedback`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),

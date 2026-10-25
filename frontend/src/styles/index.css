@@ -1,0 +1,438 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-variable.woff2') format('woff2-variations'),
+       url('/fonts/inter-variable.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-navy: #0b192c;
+  --color-navy-dark: #071325;
+  --color-navy-text: #0a1626;
+  --color-slate-blue: #6784a3;
+  --color-slate-muted: #5a6e85;
+  --color-gold: #c2a675;
+  --color-offwhite-bar: #f8f9fb;
+  --color-card-bg: rgba(11, 23, 40, 0.70);
+  --color-card-border: rgba(255, 255, 255, 0.12);
+  --color-body-grey: #556579;
+
+  /* Hero-sampled Palette Tokens */
+  --hero-amber: #E3B05B;
+  --hero-bronze: #B9854A;
+  --hero-navy: #0F1B2D;
+  --hero-slate: #3E5A85;
+  --hero-cream: #FBF6EC;
+
+  /* Diamond Zone - Hero-aligned Palette (Light Theme - Balanced Visibility ~20%) */
+  --zone-bg:
+    radial-gradient(60% 50% at 85% 20%, rgba(227, 176, 91, 0.12), transparent 70%),
+    radial-gradient(55% 45% at 10% 80%, rgba(62, 90, 133, 0.08), transparent 70%),
+    linear-gradient(180deg, #fdfbf7 0%, #f7f5ef 50%, #eef1f6 100%);
+
+  --diamond-warm-fill: linear-gradient(135deg, rgba(227, 176, 91, 0.20) 0%, rgba(185, 133, 74, 0.10) 55%, rgba(185, 133, 74, 0.02) 100%);
+  --diamond-warm-border: rgba(185, 133, 74, 0.20);
+  --diamond-warm-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.45), 0 20px 50px rgba(227, 176, 91, 0.10);
+
+  --diamond-cool-fill: linear-gradient(135deg, rgba(62, 90, 133, 0.16) 0%, rgba(15, 27, 45, 0.06) 60%, rgba(15, 27, 45, 0.02) 100%);
+  --diamond-cool-border: rgba(62, 90, 133, 0.18);
+  --diamond-cool-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.35);
+
+  --pattern-fill: var(--diamond-warm-fill);
+  --pattern-border: rgba(185, 133, 74, 0.20);
+  --pattern-glow: rgba(227, 176, 91, 0.08);
+}
+
+.dark {
+  /* Diamond Zone - Hero-aligned Palette (Dark Theme - Balanced Visibility ~20%) */
+  --zone-bg:
+    radial-gradient(60% 50% at 85% 20%, rgba(227, 176, 91, 0.08), transparent 70%),
+    radial-gradient(55% 45% at 10% 80%, rgba(62, 90, 133, 0.07), transparent 70%),
+    linear-gradient(180deg, #05080e 0%, #091322 50%, #05080e 100%);
+
+  --diamond-warm-fill: linear-gradient(135deg, rgba(227, 176, 91, 0.15) 0%, rgba(185, 133, 74, 0.06) 55%, rgba(227, 176, 91, 0.02) 100%);
+  --diamond-warm-border: rgba(227, 176, 91, 0.18);
+  --diamond-warm-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.12), 0 20px 50px rgba(227, 176, 91, 0.08);
+
+  --diamond-cool-fill: linear-gradient(135deg, rgba(120, 150, 200, 0.12) 0%, rgba(62, 90, 133, 0.05) 60%, rgba(15, 27, 45, 0.02) 100%);
+  --diamond-cool-border: rgba(150, 175, 215, 0.16);
+  --diamond-cool-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.10);
+
+  --pattern-fill: var(--diamond-warm-fill);
+  --pattern-border: rgba(227, 176, 91, 0.18);
+  --pattern-glow: rgba(227, 176, 91, 0.06);
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--color-navy-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+}
+
+@keyframes ticker-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes progress-fill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress-fill {
+  animation: progress-fill 6s linear forwards;
+}
+
+@layer utilities {
+  .tracking-eyebrow {
+    letter-spacing: 0.25em;
+  }
+  
+  .glass-card {
+    background: rgba(11, 23, 40, 0.70);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-card:hover {
+    background: rgba(19, 36, 58, 0.82);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  /* Marquee ticker animation */
+  .animate-ticker-left {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll-left 25s linear infinite;
+  }
+
+  .animate-ticker-left:hover {
+    animation-play-state: paused;
+  }
+
+  /* Hide scrollbar for clean horizontal logo strip */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ========================================================
+   Decorative Diamond Rhombus Backdrop System
+   ======================================================== */
+
+@keyframes diamondFloat {
+  from {
+    translate: 0 -10px;
+  }
+  to {
+    translate: 0 12px;
+  }
+}
+
+.diamond-zone {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--zone-bg);
+}
+
+.diamond-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.diamond-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(60% 50% at 30% 40%, var(--pattern-glow), transparent 70%);
+}
+
+.diamond-zone > section {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+.diamond {
+  position: absolute;
+  border-radius: 48px;
+  transform: rotate(45deg) scaleY(0.62);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: diamondFloat 16s ease-in-out infinite alternate;
+  will-change: translate;
+}
+
+/* Warm Family (d1, d3, d5, d7): Sunset Amber/Bronze Gradient */
+.diamond.diamond-warm,
+.diamond.d1,
+.diamond.d3,
+.diamond.d5,
+.diamond.d7 {
+  background: var(--diamond-warm-fill);
+  border: 1px solid var(--diamond-warm-border);
+  box-shadow: var(--diamond-warm-shadow);
+}
+
+/* Cool Family (d2, d4, d6): Slate/Navy Glass */
+.diamond.diamond-cool,
+.diamond.d2,
+.diamond.d4,
+.diamond.d6 {
+  background: var(--diamond-cool-fill);
+  border: 1px solid var(--diamond-cool-border);
+  box-shadow: var(--diamond-cool-shadow);
+}
+
+/* 7 Overlapping Diamond Rhombus Shapes (Alternating Warm & Cool) */
+.diamond.d1 {
+  width: 640px;
+  height: 640px;
+  left: -12%;
+  top: 4%;
+  opacity: 0.85;
+  animation-duration: 18s;
+  animation-delay: -3s;
+}
+
+.diamond.d2 {
+  width: 420px;
+  height: 420px;
+  left: 18%;
+  top: 22%;
+  opacity: 0.80;
+  animation-duration: 14s;
+  animation-delay: -7s;
+}
+
+.diamond.d3 {
+  width: 520px;
+  height: 520px;
+  left: 42%;
+  top: 8%;
+  opacity: 0.78;
+  animation-duration: 21s;
+  animation-delay: -11s;
+}
+
+.diamond.d4 {
+  width: 700px;
+  height: 700px;
+  right: -10%;
+  top: 30%;
+  opacity: 0.82;
+  animation-duration: 16s;
+  animation-delay: -4s;
+}
+
+.diamond.d5 {
+  width: 360px;
+  height: 360px;
+  left: 30%;
+  top: 52%;
+  opacity: 0.80;
+  animation-duration: 13s;
+  animation-delay: -9s;
+}
+
+.diamond.d6 {
+  width: 480px;
+  height: 480px;
+  right: 18%;
+  top: 58%;
+  opacity: 0.76;
+  animation-duration: 19s;
+  animation-delay: -2s;
+}
+
+.diamond.d7 {
+  width: 300px;
+  height: 300px;
+  left: 6%;
+  top: 70%;
+  opacity: 0.72;
+  animation-duration: 15s;
+  animation-delay: -6s;
+}
+
+/* Variant for About Axia Kairos Section */
+.diamond-about-1 {
+  position: absolute;
+  top: -8rem;
+  left: -8rem;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 36px;
+  border: 1px solid var(--diamond-warm-border);
+  background: var(--diamond-warm-fill);
+  box-shadow: var(--diamond-warm-shadow);
+  opacity: 0.85;
+  transform: rotate(45deg) scaleY(0.62);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: diamondFloat 18s ease-in-out infinite alternate;
+}
+
+.diamond-about-2 {
+  position: absolute;
+  top: -4rem;
+  left: -4rem;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 36px;
+  border: 1px solid var(--diamond-cool-border);
+  background: var(--diamond-cool-fill);
+  box-shadow: var(--diamond-cool-shadow);
+  opacity: 0.75;
+  transform: rotate(45deg) scaleY(0.62);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: diamondFloat 14s ease-in-out infinite alternate -6s;
+}
+
+/* Variant for FAQ Section */
+.diamond.diamond-faq-1 {
+  width: 580px;
+  height: 580px;
+  right: -8%;
+  top: 4%;
+  opacity: 0.82;
+  background: var(--diamond-warm-fill);
+  border: 1px solid var(--diamond-warm-border);
+  box-shadow: var(--diamond-warm-shadow);
+  animation-duration: 19s;
+  animation-delay: -4s;
+}
+
+.diamond.diamond-faq-2 {
+  width: 440px;
+  height: 440px;
+  left: 28%;
+  top: 32%;
+  opacity: 0.72;
+  background: var(--diamond-cool-fill);
+  border: 1px solid var(--diamond-cool-border);
+  box-shadow: var(--diamond-cool-shadow);
+  animation-duration: 15s;
+  animation-delay: -8s;
+}
+
+.diamond.diamond-faq-3 {
+  width: 520px;
+  height: 520px;
+  left: -10%;
+  top: 42%;
+  opacity: 0.78;
+  background: var(--diamond-warm-fill);
+  border: 1px solid var(--diamond-warm-border);
+  box-shadow: var(--diamond-warm-shadow);
+  animation-duration: 20s;
+  animation-delay: -2s;
+}
+
+.diamond.diamond-faq-4 {
+  width: 360px;
+  height: 360px;
+  right: 14%;
+  top: 62%;
+  opacity: 0.68;
+  background: var(--diamond-cool-fill);
+  border: 1px solid var(--diamond-cool-border);
+  box-shadow: var(--diamond-cool-shadow);
+  animation-duration: 14s;
+  animation-delay: -6s;
+}
+
+.diamond.diamond-faq-5 {
+  width: 320px;
+  height: 320px;
+  left: 8%;
+  top: -4%;
+  opacity: 0.62;
+  background: var(--diamond-warm-fill);
+  border: 1px solid var(--diamond-warm-border);
+  box-shadow: var(--diamond-warm-shadow);
+  animation-duration: 17s;
+  animation-delay: -10s;
+}
+
+/* Tablet: hide d3, d7, faq-5, scale rest to ~70% */
+@media (max-width: 1024px) {
+  .diamond.d3,
+  .diamond.d7,
+  .diamond.diamond-faq-5 {
+    display: none;
+  }
+  .diamond.d1 { width: 448px; height: 448px; }
+  .diamond.d2 { width: 294px; height: 294px; }
+  .diamond.d4 { width: 490px; height: 490px; }
+  .diamond.d5 { width: 252px; height: 252px; }
+  .diamond.d6 { width: 336px; height: 336px; }
+
+  .diamond.diamond-faq-1 { width: 406px; height: 406px; }
+  .diamond.diamond-faq-2 { width: 308px; height: 308px; }
+  .diamond.diamond-faq-3 { width: 364px; height: 364px; }
+  .diamond.diamond-faq-4 { width: 252px; height: 252px; }
+}
+
+/* Mobile: keep only primary diamonds, scale to ~50, lower opacity */
+@media (max-width: 640px) {
+  .diamond.d2,
+  .diamond.d3,
+  .diamond.d6,
+  .diamond.d7,
+  .diamond.diamond-faq-2,
+  .diamond.diamond-faq-4,
+  .diamond.diamond-faq-5 {
+    display: none;
+  }
+  .diamond.d1 { width: 320px; height: 320px; opacity: 0.60 !important; }
+  .diamond.d4 { width: 350px; height: 350px; opacity: 0.60 !important; }
+  .diamond.d5 { width: 180px; height: 180px; opacity: 0.60 !important; }
+
+  .diamond.diamond-faq-1 { width: 290px; height: 290px; opacity: 0.50 !important; }
+  .diamond.diamond-faq-3 { width: 260px; height: 260px; opacity: 0.50 !important; }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .diamond,
+  .diamond-about-1,
+  .diamond-about-2 {
+    animation: none !important;
+  }
+}

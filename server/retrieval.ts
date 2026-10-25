@@ -105,12 +105,24 @@ export const CATEGORY_TYPE_MAP: Record<string, string[]> = {
   job: ['job'],
 };
 
+function resolveKbPath(): string {
+  const candidates = [
+    path.resolve(process.cwd(), 'knowledge.json'),
+    path.resolve(process.cwd(), 'backend', 'knowledge.json'),
+    path.resolve(process.cwd(), 'server', 'knowledge.json'),
+  ];
+  for (const c of candidates) {
+    if (fs.existsSync(c)) return c;
+  }
+  return candidates[0];
+}
+
 export class KnowledgeRetriever {
   private kb: KnowledgeBaseData;
   private miniSearch: MiniSearch<Chunk>;
 
   constructor() {
-    const kbPath = path.resolve(process.cwd(), 'server', 'knowledge.json');
+    const kbPath = resolveKbPath();
     if (!fs.existsSync(kbPath)) {
       throw new Error(`Knowledge base file not found at ${kbPath}. Run 'npm run kb:build' first.`);
     }
@@ -273,6 +285,13 @@ export class KnowledgeRetriever {
 
   public getChunksByType(type: Chunk['type']): Chunk[] {
     return this.kb.chunks.filter((c) => c.type === type);
+  }
+
+  public reload(updatedKb: KnowledgeBaseData): void {
+    this.kb = updatedKb;
+    this.miniSearch.removeAll();
+    this.miniSearch.addAll(this.kb.chunks);
+    console.log(`🔄 Knowledge Base refreshed with ${this.kb.chunks.length} chunks.`);
   }
 }
 
